@@ -21,13 +21,17 @@ app.post('/', (req, res) =>{
             if(err){
                 res.send(err)
             }else{
-                res.send("file uploaded with sucess")
+                //res.send("file uploaded with sucess")
+                console.log("File Uploaded successfuly");
+                res.sendFile(__dirname + '/index.html');
             }
         });
     }
 })
 
-app.listen(3000);
+app.listen(3000, function(){
+    console.log("Listening on Port 3000");
+});
 
 /* https://www.youtube.com/watch?v=jlDfT57QzP4 html download */
 
