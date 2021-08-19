@@ -9,10 +9,20 @@ const app = express();
 app.use(upload())
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/main.html')
 })
 
-/* Upload */
+/*Main menu option*/
+app.post('/', (req, res) =>{
+    if(req.value == "Download"){
+        res.sendFile(__dirname + '/download.html');
+    }else{
+        res.sendFile(__dirname + '/upload.html');
+    }
+})
+
+
+/* Upload () */
 app.post('/', (req, res) =>{
     if(req.files){
         var file = req.files.file;
@@ -34,7 +44,7 @@ app.post('/', (req, res) =>{
             }else{
                 //res.send("file uploaded with sucess")
                 console.log("File Uploaded successfuly");
-                res.sendFile(__dirname + '/index.html');
+                res.sendFile(__dirname + '/upload.html');
                 //res.render("", {message: "File Uploaded successfuly"})
             }
         });
