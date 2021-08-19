@@ -1,7 +1,7 @@
 /*npm express-fileupload*/
 const express = require('express')
 const upload = require('express-fileupload')
-
+var fs = require("fs"); //load filesystem module
 const app = express();
 
 app.use(upload())
@@ -15,8 +15,17 @@ app.post('/', (req, res) =>{
     if(req.files){
         var file = req.files.file;
         var filename = file.name;
-        console.log(filename);
         
+        var fileSize = file.size; //Bytes
+
+        /*//Input file size
+        var stats = fs.statSync(__dirname + filename)
+        var fileSizeBytes = stats.size; //Bytes
+        var fileSize = fileSizeBytes / (1024*1024);*/
+
+        console.log("Name: " + filename);
+        console.log("Size: " + fileSize + " Bytes")
+
         file.mv('./uploads/' + filename, function (err){ //192.168.0.X./uploads?
             if(err){
                 res.send(err)
