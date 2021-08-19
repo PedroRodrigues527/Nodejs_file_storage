@@ -1,6 +1,8 @@
 /*npm express-fileupload*/
 const express = require('express')
 const upload = require('express-fileupload')
+//var alert = require("alert-node")
+//const flash = require('connect-flash');
 var fs = require("fs"); //load filesystem module
 const app = express();
 
@@ -33,6 +35,7 @@ app.post('/', (req, res) =>{
                 //res.send("file uploaded with sucess")
                 console.log("File Uploaded successfuly");
                 res.sendFile(__dirname + '/index.html');
+                //res.render("", {message: "File Uploaded successfuly"})
             }
         });
     }
