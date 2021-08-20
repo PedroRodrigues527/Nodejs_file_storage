@@ -8,6 +8,7 @@ var fs = require("fs"); //load filesystem module
 var router = express.Router()
 const app = express();
 var i = 0
+var port = 3000
 
 app.use(upload())
 
@@ -64,10 +65,10 @@ app.post('/', (req, res) =>{
     }
 })
 
-app.listen(8000, function(){
+app.listen(port, function(){
     console.log("**************")
     console.log("SERVER ONLINE")
-    console.log("Listening on Port 8000");
+    console.log("Listening on Port " + port);
 });
 
 /* https://www.youtube.com/watch?v=jlDfT57QzP4 html download */
