@@ -8,8 +8,18 @@
             <input type="submit" value="Upload"/>
         </form>
 
+        <a href="/uploads/hp.txt">Download all folder</a>
+        <button onclick="showFiles()">Show files in folder</p>
         <button onclick="window.location.href='/'">Return to Main Menu
         </button>
+
+        <script>
+            var fs = require('fs');
+            var files = fs.readdirSync('/uploads/');
+            function showFiles(){
+                document.getElementById("allfiles").innerHTML = files;
+            }
+        </script>
 
     </body>
 </html>
