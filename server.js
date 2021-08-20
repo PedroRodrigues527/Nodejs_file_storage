@@ -1,4 +1,5 @@
 /*npm express-fileupload*/
+const { SSL_OP_EPHEMERAL_RSA } = require('constants');
 const express = require('express')
 const upload = require('express-fileupload')
 //var alert = require("alert-node")
@@ -6,6 +7,7 @@ const upload = require('express-fileupload')
 var fs = require("fs"); //load filesystem module
 var router = express.Router()
 const app = express();
+var i = 0
 
 app.use(upload())
 
@@ -39,15 +41,23 @@ app.post('/', (req, res) =>{
 
         console.log("Name: " + filename);
         console.log("Size: " + fileSize + " Bytes")
-
         file.mv('./uploads/' + filename, function (err){ //192.168.0.X./uploads?
+            console.log("Filename:" + filename);
+            //console.log("File:" + file); //[object Object]
             if(err){
                 res.send(err)
-            }else{
+            }         
+            else{
                 //res.send("file uploaded with sucess")
                 console.log("File Uploaded successfuly");
+                var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize 
+                res.attachment('Upload Report ' + i + '.txt')
+                res.type('txt')
+                res.send(text1)
+                i++;
+                console.log("*********")
                 res.sendFile(__dirname + '/main.html');
-                res.sendFile(__dirname + 'alertJSUpload');
+                //res.sendFile(__dirname + 'alertJSUpload');
                 //res.render("", {message: "File Uploaded successfuly"})
             }
         });
@@ -55,6 +65,8 @@ app.post('/', (req, res) =>{
 })
 
 app.listen(8000, function(){
+    console.log("**************")
+    console.log("SERVER ONLINE")
     console.log("Listening on Port 8000");
 });
 
