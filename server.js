@@ -47,6 +47,7 @@ app.post('/', (req, res) =>{
                 //res.send("file uploaded with sucess")
                 console.log("File Uploaded successfuly");
                 res.sendFile(__dirname + '/main.html');
+                res.sendFile(__dirname + 'alertJSUpload');
                 //res.render("", {message: "File Uploaded successfuly"})
             }
         });
