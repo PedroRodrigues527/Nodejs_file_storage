@@ -4,6 +4,7 @@ const upload = require('express-fileupload')
 //var alert = require("alert-node")
 //const flash = require('connect-flash');
 var fs = require("fs"); //load filesystem module
+var router = express.Router()
 const app = express();
 
 app.use(upload())
@@ -12,13 +13,14 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/main.html')
 })
 
-/*Main menu option*/
-app.post('/', (req, res) =>{
-    if(req.value == "Download"){
-        res.sendFile(__dirname + '/download.html');
-    }else{
-        res.sendFile(__dirname + '/upload.html');
-    }
+app.get('/download', (req, res) => {
+    //console.log("entering download");
+    res.sendFile(__dirname + '/download.html')
+})
+
+app.get('/upload', (req, res) => {
+    //console.log("entering upload");
+    res.sendFile(__dirname + '/upload.html')
 })
 
 
@@ -44,15 +46,15 @@ app.post('/', (req, res) =>{
             }else{
                 //res.send("file uploaded with sucess")
                 console.log("File Uploaded successfuly");
-                res.sendFile(__dirname + '/upload.html');
+                res.sendFile(__dirname + '/main.html');
                 //res.render("", {message: "File Uploaded successfuly"})
             }
         });
     }
 })
 
-app.listen(3000, function(){
-    console.log("Listening on Port 3000");
+app.listen(8000, function(){
+    console.log("Listening on Port 8000");
 });
 
 /* https://www.youtube.com/watch?v=jlDfT57QzP4 html download */
