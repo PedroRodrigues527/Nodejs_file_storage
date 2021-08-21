@@ -7,7 +7,7 @@ const upload = require('express-fileupload')
 var fs = require("fs"); //load filesystem module
 var router = express.Router()
 const app = express();
-/*npm i --S express-device */
+/*npm i --S express-device , npm install i --S express-device*/
 var device = require('express-device')
 var i = 0
 var port = 3000
