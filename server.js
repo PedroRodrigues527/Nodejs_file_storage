@@ -7,14 +7,19 @@ const upload = require('express-fileupload')
 var fs = require("fs"); //load filesystem module
 var router = express.Router()
 const app = express();
+/*npm i --S express-device */
+var device = require('express-device')
 var i = 0
 var port = 3000
+
+app.use(device.capture())
 
 app.use(upload())
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/main.html')
     console.log("IP conected: " + req.connection.remoteAddress)
+    console.log("Device: "+req.device.type.toUpperCase())
 })
 
 app.get('/download', (req, res) => {
