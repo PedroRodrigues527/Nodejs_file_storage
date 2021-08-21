@@ -52,7 +52,7 @@ app.post('/', (req, res) =>{
             else{
                 //res.send("file uploaded with sucess")
                 console.log("File Uploaded successfuly");
-                var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + request.connection.remoteAddress
+                var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
                 res.attachment('Upload Report ' + i + '.txt')
                 res.type('txt')
                 res.send(text1)
