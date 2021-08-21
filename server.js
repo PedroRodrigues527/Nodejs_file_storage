@@ -14,6 +14,7 @@ app.use(upload())
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/main.html')
+    console.log("IP conected: " + req.connection.remoteAddress)
 })
 
 app.get('/download', (req, res) => {
@@ -51,7 +52,7 @@ app.post('/', (req, res) =>{
             else{
                 //res.send("file uploaded with sucess")
                 console.log("File Uploaded successfuly");
-                var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize 
+                var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + request.connection.remoteAddress
                 res.attachment('Upload Report ' + i + '.txt')
                 res.type('txt')
                 res.send(text1)
