@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/connect', (req, res)=>{
-    console.log("***")
+    console.log()
     console.log("IP conected: " + req.connection.remoteAddress)
     console.log("Device: "+req.device.type.toUpperCase())
     res.redirect('/mainmenu')
@@ -78,12 +78,13 @@ app.post('/', (req, res) =>{
         var fileSizeBytes = stats.size; //Bytes
         var fileSize = fileSizeBytes / (1024*1024);*/
 
-        console.log("Name: " + filename);
-        console.log("Size: " + fileSize + " Bytes")
+        //console.log("Name: " + filename);
+        //console.log("Size: " + fileSize + " Bytes")
         var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
 
         file.mv('./uploads/' + filename, function (err){ //192.168.0.X./uploads?
             console.log("Filename:" + filename);
+            console.log("Size: " + fileSize + " Bytes")
             //console.log("File:" + file); //[object Object]
             if(err){
                 res.send(err)
@@ -91,12 +92,14 @@ app.post('/', (req, res) =>{
             else{
                 //res.send("file uploaded with sucess")
                 console.log("File Uploaded successfuly");
+                console.log("******")
 
+                /*
                 //Send a report file to user
-                var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
+                //var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
                 res.attachment('Upload Report ' + i + '.txt')
                 res.type('txt')
-                res.send(text1)
+                res.send(text1)*/
 
 
                 //needs directory of upload folder
