@@ -17,12 +17,31 @@ app.use(device.capture())
 
 app.use(upload())
 
-
-
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/main.html')
+    res.sendFile(__dirname + '/connection.html');
+    //console.log("IP conected: " + req.connection.remoteAddress)
+    //console.log("Device: "+req.device.type.toUpperCase())
+    //console.log("teste")
+})
+
+app.get('/connect', (req, res)=>{
+    console.log("***")
     console.log("IP conected: " + req.connection.remoteAddress)
     console.log("Device: "+req.device.type.toUpperCase())
+    res.redirect('/mainmenu')
+})
+
+app.get('/mainmenu', (req, res) => {
+    res.sendFile(__dirname + '/main.html')
+    //console.log("IP conected: " + req.connection.remoteAddress)
+    //console.log("Device: "+req.device.type.toUpperCase())
+})
+
+app.get('/disconnect', (req, res)=>{
+    console.log("***")
+    console.log("IP disconected: " + req.connection.remoteAddress)
+    console.log("Device: "+req.device.type.toUpperCase())
+    res.redirect('/');
 })
 
 app.get('/download', (req, res) => {
@@ -98,7 +117,7 @@ app.post('/', (req, res) =>{
         console.log("*********")
         res.sendFile(__dirname + '/main.html');
     }else{
-        res.redirect('/')
+        res.redirect('/mainmenu')
     }
 })
 
