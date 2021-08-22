@@ -90,13 +90,15 @@ app.post('/', (req, res) =>{
 
                 i++;
 
-                //return to main menu
-                console.log("*********")
-                res.sendFile(__dirname + '/main.html');
                 //res.sendFile(__dirname + 'alertJSUpload');
                 //res.render("", {message: "File Uploaded successfuly"})
             }
         });
+        //return to main menu
+        console.log("*********")
+        res.sendFile(__dirname + '/main.html');
+    }else{
+        res.redirect('/')
     }
 })
 
