@@ -85,7 +85,7 @@ app.post('/', (req, res) =>{
                     if(err) {
                         return console.log(err);
                     }
-                    console.log("The file was saved!");
+                    //console.log("The file was saved!");
                 });
 
                 i++;
