@@ -17,6 +17,8 @@ app.use(device.capture())
 
 app.use(upload())
 
+app.use(express.static(__dirname + '/'));
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/connection.html');
     //console.log("IP conected: " + req.connection.remoteAddress)
