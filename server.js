@@ -45,6 +45,7 @@ app.get('/disconnect', (req, res)=>{
     console.log("Device: "+req.device.type.toUpperCase())
     res.redirect('/');
 })
+
 /*
 app.get('/download', (req, res) => {
     //console.log("entering download");
