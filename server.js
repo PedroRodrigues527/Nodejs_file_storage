@@ -13,6 +13,8 @@ var device = require('express-device')
 var i = 0
 var port = 8000
 
+global.auth = false;
+
 global.username = "";
 
 app.use(device.capture())
@@ -38,10 +40,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/login', function (req, res) {
     username = req.body.name
+    password = req.body.password
     console.log("")
-    console.log("*** User Connected ***")
-    console.log("Username: "+ username)
-    res.redirect('/connect')
+    if(username == "admin" && password == "123" || auth == true){
+        console.log("*** User Connected ***")
+        console.log("Username: "+ username)
+        auth = true;
+        res.redirect('/connect')
+    }else{
+        console.log("Login incorrect Please try again!")
+        console.log("");
+        res.redirect('/')
+    }
 });
 
 app.get('/connect', (req, res)=>{
@@ -53,17 +63,30 @@ app.get('/connect', (req, res)=>{
 })
 
 app.get('/mainmenu', (req, res) => {
-    res.sendFile(__dirname + '/main.html')
+    if(auth==false){
+        res.redirect('/')
+    }
+    else{
+        res.sendFile(__dirname + '/main.html')
+    }
+
     //console.log("IP conected: " + req.connection.remoteAddress)
     //console.log("Device: "+req.device.type.toUpperCase())
 })
 
 app.get('/disconnect', (req, res)=>{
-    console.log("*** User Disconnected *** ")
-    console.log("Username: " + username)
-    console.log("IP disconected: " + req.connection.remoteAddress)
-    console.log("Device: "+req.device.type.toUpperCase())
-    res.redirect('/');
+    if(auth==false){
+        res.redirect('/')
+    }
+    else{
+        auth = false
+        console.log("*** User Disconnected *** ")
+        console.log("Username: " + username)
+        console.log("IP disconected: " + req.connection.remoteAddress)
+        console.log("Device: "+req.device.type.toUpperCase())
+        res.redirect('/');
+    }
+
 })
 
 /*
@@ -82,72 +105,81 @@ app.get('/downloads', (req, res)=>{
 */
 
 app.get('/upload', (req, res) => {
+    if(auth==false){
+        res.redirect('/')
+    }
+    else{
+        res.sendFile(__dirname + '/upload.html')
+    }
     //console.log("entering upload");
-    res.sendFile(__dirname + '/upload.html')
 })
 
 /* https://stackoverflow.com/questions/40509666/sending-whole-folder-content-to-client-with-express */
 
 /* Upload () */
 app.post('/', (req, res) =>{
-
-    if(req.files){
-        var file = req.files.file;
-        var filename = file.name;
-        
-        var fileSize = file.size; //Bytes
-
-        /*//Input file size
-        var stats = fs.statSync(__dirname + filename)
-        var fileSizeBytes = stats.size; //Bytes
-        var fileSize = fileSizeBytes / (1024*1024);*/
-
-        //console.log("Name: " + filename);
-        //console.log("Size: " + fileSize + " Bytes")
-        var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress + " ,User: " + username
-
-        file.mv('./uploads/' + filename, function (err){ //192.168.0.X./uploads?
-            console.log("")
-            console.log("*** File uploaded ***")
-            console.log("User: " + username)
-            console.log("Filename: " + filename);
-            console.log("Size: " + fileSize + " Bytes")
-            //console.log("File:" + file); //[object Object]
-            if(err){
-                res.send(err)
-            }         
-            else{
-                //res.send("file uploaded with sucess")
-                console.log("File Uploaded successfuly!");
-                console.log("******")
-
-                /*
-                //Send a report file to user
-                //var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
-                res.attachment('Upload Report ' + i + '.txt')
-                res.type('txt')
-                res.send(text1)*/
-
-
-                //needs directory of upload folder
-                fs.writeFile("./uploads/report"+i+".txt", text1 , function(err) {
-                    if(err) {
-                        return console.log(err);
-                    }
-                    //console.log("The file was saved!");
-                });
-
-                i++;
-
-                //res.sendFile(__dirname + 'alertJSUpload');
-                //res.render("", {message: "File Uploaded successfuly"})
-            }
-        });
-        //return to main menu
-        console.log("*********")
-        res.sendFile(__dirname + '/main.html');
-    }else{
-        res.redirect('/mainmenu')
+    if(auth==true){
+        if(req.files){
+            var file = req.files.file;
+            var filename = file.name;
+            
+            var fileSize = file.size; //Bytes
+    
+            /*//Input file size
+            var stats = fs.statSync(__dirname + filename)
+            var fileSizeBytes = stats.size; //Bytes
+            var fileSize = fileSizeBytes / (1024*1024);*/
+    
+            //console.log("Name: " + filename);
+            //console.log("Size: " + fileSize + " Bytes")
+            var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress + " ,User: " + username
+    
+            file.mv('./uploads/' + filename, function (err){ //192.168.0.X./uploads?
+                console.log("")
+                console.log("*** File uploaded ***")
+                console.log("User: " + username)
+                console.log("Filename: " + filename);
+                console.log("Size: " + fileSize + " Bytes")
+                //console.log("File:" + file); //[object Object]
+                if(err){
+                    res.send(err)
+                }         
+                else{
+                    //res.send("file uploaded with sucess")
+                    console.log("File Uploaded successfuly!");
+                    console.log("******")
+    
+                    /*
+                    //Send a report file to user
+                    //var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
+                    res.attachment('Upload Report ' + i + '.txt')
+                    res.type('txt')
+                    res.send(text1)*/
+    
+    
+                    //needs directory of upload folder
+                    fs.writeFile("./uploads/report"+i+".txt", text1 , function(err) {
+                        if(err) {
+                            return console.log(err);
+                        }
+                        //console.log("The file was saved!");
+                    });
+    
+                    i++;
+    
+                    //res.sendFile(__dirname + 'alertJSUpload');
+                    //res.render("", {message: "File Uploaded successfuly"})
+                }
+            });
+            //return to main menu
+            console.log("*********")
+            res.sendFile(__dirname + '/main.html');
+        }else{
+            res.redirect('/mainmenu')
+        }
+    }
+    else{
+        res.redirect('/')
     }
 })
 
