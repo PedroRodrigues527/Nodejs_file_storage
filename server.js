@@ -105,7 +105,7 @@ app.post('/downloads', (req, res)=>{
     Typefile = req.body.typefile
     console.log(Namefile);
     console.log(Typefile);
-    res.send(__dirname + '/uploads/'+Namefile + "." + Typefile)
+    res.download(__dirname + '/uploads/'+Namefile + "." + Typefile)
     //res.redirect('/download')
 })
 
