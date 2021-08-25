@@ -11,7 +11,9 @@ const app = express();
 /*npm i --S express-device , npm install i --S express-device*/
 var device = require('express-device')
 var i = 0
-var port = 3000
+var port = 8000
+
+global.username = "";
 
 app.use(device.capture())
 
@@ -19,16 +21,33 @@ app.use(upload())
 
 app.use(express.static(__dirname + '/'));
 
+const bodyParser = require('body-parser');
+
 app.get('/', (req, res) => {
+   // console.log("IP conected: " + req.connection.remoteAddress)
+   // console.log("Device: "+req.device.type.toUpperCase())
+   /* app.post('/', function (req, res) {
+        var name = req.body
+        console.log("user name: "+ name)
+    });*/
     res.sendFile(__dirname + '/connection.html');
-    //console.log("IP conected: " + req.connection.remoteAddress)
-    //console.log("Device: "+req.device.type.toUpperCase())
-    //console.log("teste")
+    //console.log("teste1")
 })
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post('/login', function (req, res) {
+    username = req.body.name
+    console.log("")
+    console.log("*** User Connected ***")
+    console.log("Username: "+ username)
+    res.redirect('/connect')
+});
+
 app.get('/connect', (req, res)=>{
-    console.log()
-    console.log("IP conected: " + req.connection.remoteAddress)
+    //console.log("fileName: " + req.body.filename)
+    //console.log("Name: " + req.body.name)
+    console.log("IP: " + req.connection.remoteAddress)
     console.log("Device: "+req.device.type.toUpperCase())
     res.redirect('/mainmenu')
 })
@@ -40,7 +59,8 @@ app.get('/mainmenu', (req, res) => {
 })
 
 app.get('/disconnect', (req, res)=>{
-    console.log("***")
+    console.log("*** User Disconnected *** ")
+    console.log("Username: " + username)
     console.log("IP disconected: " + req.connection.remoteAddress)
     console.log("Device: "+req.device.type.toUpperCase())
     res.redirect('/');
@@ -70,6 +90,7 @@ app.get('/upload', (req, res) => {
 
 /* Upload () */
 app.post('/', (req, res) =>{
+
     if(req.files){
         var file = req.files.file;
         var filename = file.name;
@@ -83,10 +104,13 @@ app.post('/', (req, res) =>{
 
         //console.log("Name: " + filename);
         //console.log("Size: " + fileSize + " Bytes")
-        var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
+        var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress + " ,User: " + username
 
         file.mv('./uploads/' + filename, function (err){ //192.168.0.X./uploads?
-            console.log("Filename:" + filename);
+            console.log("")
+            console.log("*** File uploaded ***")
+            console.log("User: " + username)
+            console.log("Filename: " + filename);
             console.log("Size: " + fileSize + " Bytes")
             //console.log("File:" + file); //[object Object]
             if(err){
@@ -94,7 +118,7 @@ app.post('/', (req, res) =>{
             }         
             else{
                 //res.send("file uploaded with sucess")
-                console.log("File Uploaded successfuly");
+                console.log("File Uploaded successfuly!");
                 console.log("******")
 
                 /*
