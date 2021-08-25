@@ -1,26 +1,23 @@
-0
 <html>
     <head>
     </head>
     <body>
         <h1>Download File</h1>
-        <form method="POST" action="/" enctype="multipart/form-data">
-            <input type="file" name="file"/>   
-            <input type="submit" value="Upload"/>
+        <form method="post" action="/downloads" enctype="multipart/form-data">
+            <label>Name of the file:</label><br>
+            <input type="text" name="namefile" id="namefile"/>
+            <br>
+            <label>Type of the file: </label><br>   
+            <input type="text" name="typefile" id="typefile"/>
+            <br>
+            <button type="submit" class="btn btn-primary submit">Download File</button>
         </form>
 
+        <!--
         <a href="/uploads/hp.txt">Download all folder</a>
         <button onclick="showFiles()">Show files in folder</p>
         <button onclick="window.location.href='/'">Return to Main Menu
         </button>
-
-        <script>
-            var fs = require('fs');
-            var files = fs.readdirSync('/uploads/');
-            function showFiles(){
-                document.getElementById("allfiles").innerHTML = files;
-            }
-        </script>
-
+        -->
     </body>
 </html>

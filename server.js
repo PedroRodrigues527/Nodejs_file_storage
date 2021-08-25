@@ -17,6 +17,7 @@ global.auth = false;
 
 global.username = "";
 
+
 app.use(device.capture())
 
 app.use(upload())
@@ -24,6 +25,7 @@ app.use(upload())
 app.use(express.static(__dirname + '/'));
 
 const bodyParser = require('body-parser');
+
 
 app.get('/', (req, res) => {
    // console.log("IP conected: " + req.connection.remoteAddress)
@@ -69,6 +71,7 @@ app.get('/mainmenu', (req, res) => {
     }
     else{
         res.sendFile(__dirname + '/main.html')
+
     }
 
     //console.log("IP conected: " + req.connection.remoteAddress)
@@ -90,20 +93,22 @@ app.get('/disconnect', (req, res)=>{
 
 })
 
-/*
+
 app.get('/download', (req, res) => {
     //console.log("entering download");
     res.sendFile(__dirname + '/download.html')
+    //res.send(namefile.typefile)
 })
 
-app.get('/downloads', (req, res)=>{
-    console.log("teste!")
-    var htmlPath = path.join(__dirname, 'uploads');
-    //app.use(express.static(htmlPath));
-    //res.sendFile(__dirname, '/uploads/')
-    app.use('/uploads', express.static(htmlPath));
+app.post('/downloads', (req, res)=>{
+    Namefile = req.body.namefile
+    Typefile = req.body.typefile
+    console.log(Namefile);
+    console.log(Typefile);
+    res.send(__dirname + '/uploads/'+Namefile + "." + Typefile)
+    //res.redirect('/download')
 })
-*/
+
 
 app.get('/upload', (req, res) => {
     if(auth==false){
