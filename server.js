@@ -59,6 +59,7 @@ app.get('/connect', (req, res)=>{
     //console.log("Name: " + req.body.name)
     console.log("IP: " + req.connection.remoteAddress)
     console.log("Device: "+req.device.type.toUpperCase())
+    console.log("");
     res.redirect('/mainmenu')
 })
 
