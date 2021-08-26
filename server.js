@@ -57,12 +57,17 @@ app.post('/login', function (req, res) {
 });
 
 app.get('/connect', (req, res)=>{
-    //console.log("fileName: " + req.body.filename)
-    //console.log("Name: " + req.body.name)
-    console.log("IP: " + req.connection.remoteAddress)
-    console.log("Device: "+req.device.type.toUpperCase())
-    console.log("");
-    res.redirect('/mainmenu')
+    if(auth==false){
+        res.redirect('/')
+    }
+    else{
+        //console.log("fileName: " + req.body.filename)
+        //console.log("Name: " + req.body.name)
+        console.log("IP: " + req.connection.remoteAddress)
+        console.log("Device: "+req.device.type.toUpperCase())
+        console.log("");
+        res.redirect('/mainmenu')
+    }
 })
 
 app.get('/mainmenu', (req, res) => {
@@ -95,46 +100,67 @@ app.get('/disconnect', (req, res)=>{
 
 
 app.get('/download', (req, res) => {
+    if(auth==false){
+        res.redirect('/')
+    }
+    else{
     //console.log("entering download");
     res.sendFile(__dirname + '/download.html')
     //res.send(namefile.typefile)
+    }
+
 })
 
 app.post('/downloads', (req, res)=>{
-    Namefile = req.body.namefile
-    Typefile = req.body.typefile
-    //console.log(Namefile);
-    //console.log(Typefile);
-    res.download(__dirname + '/uploads/'+Namefile + "." + Typefile)
-    console.log("***File Downloaded***")
-    console.log("Username: " + username)
-    console.log("File: "+Namefile + "." + Typefile)
-    console.log("")
-    //res.redirect('/download')
-})
-
-app.get('/delete', (req, res)=>{
-    res.sendFile(__dirname + '/delete.html')
-})
-
-app.post('/deletefile', (req, res)=>{
-    Namefile = req.body.namefile
-    Typefile = req.body.typefile
-    //console.log(Namefile);
-    //console.log(Typefile);
-    app.delete(__dirname + '/uploads/'+Namefile + "." + Typefile)
-
-    fs.unlink(__dirname + '/uploads/'+Namefile + "." + Typefile, (err)=>{
-        if (err) {
-            console.error(err)
-            return
-        }
-        console.log("***File Deleted***")
+    if(auth==false){
+        res.redirect('/')
+    }
+    else{
+        Namefile = req.body.namefile
+        Typefile = req.body.typefile
+        //console.log(Namefile);
+        //console.log(Typefile);
+        res.download(__dirname + '/uploads/'+Namefile + "." + Typefile)
+        console.log("***File Downloaded***")
         console.log("Username: " + username)
         console.log("File: "+Namefile + "." + Typefile)
         console.log("")
-        res.redirect('/delete')
-    })
+        //res.redirect('/download')
+    }
+})
+
+app.get('/delete', (req, res)=>{
+    if(auth==false){
+        res.redirect('/')
+    }
+    else{
+        res.sendFile(__dirname + '/delete.html')
+    }    
+})
+
+app.post('/deletefile', (req, res)=>{
+    if(auth==false){
+        res.redirect('/')
+    }
+    else{
+        Namefile = req.body.namefile
+        Typefile = req.body.typefile
+        //console.log(Namefile);
+        //console.log(Typefile);
+        app.delete(__dirname + '/uploads/'+Namefile + "." + Typefile)
+
+        fs.unlink(__dirname + '/uploads/'+Namefile + "." + Typefile, (err)=>{
+            if (err) {
+                console.error(err)
+                return
+            }
+            console.log("***File Deleted***")
+            console.log("Username: " + username)
+            console.log("File: "+Namefile + "." + Typefile)
+            console.log("")
+            res.redirect('/delete')
+        })
+    }
 })
 
 
