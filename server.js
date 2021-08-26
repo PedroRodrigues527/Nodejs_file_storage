@@ -103,9 +103,12 @@ app.get('/download', (req, res) => {
 app.post('/downloads', (req, res)=>{
     Namefile = req.body.namefile
     Typefile = req.body.typefile
-    console.log(Namefile);
-    console.log(Typefile);
+    //console.log(Namefile);
+    //console.log(Typefile);
     res.download(__dirname + '/uploads/'+Namefile + "." + Typefile)
+    console.log("***File Downloaded***")
+    console.log("Username: " + username)
+    console.log("File: "+Namefile + "." + Typefile)
     //res.redirect('/download')
 })
 
