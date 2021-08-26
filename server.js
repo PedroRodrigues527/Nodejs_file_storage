@@ -109,7 +109,32 @@ app.post('/downloads', (req, res)=>{
     console.log("***File Downloaded***")
     console.log("Username: " + username)
     console.log("File: "+Namefile + "." + Typefile)
+    console.log("")
     //res.redirect('/download')
+})
+
+app.get('/delete', (req, res)=>{
+    res.sendFile(__dirname + '/delete.html')
+})
+
+app.post('/deletefile', (req, res)=>{
+    Namefile = req.body.namefile
+    Typefile = req.body.typefile
+    //console.log(Namefile);
+    //console.log(Typefile);
+    app.delete(__dirname + '/uploads/'+Namefile + "." + Typefile)
+
+    fs.unlink(__dirname + '/uploads/'+Namefile + "." + Typefile, (err)=>{
+        if (err) {
+            console.error(err)
+            return
+        }
+        console.log("***File Deleted***")
+        console.log("Username: " + username)
+        console.log("File: "+Namefile + "." + Typefile)
+        console.log("")
+        res.redirect('/delete')
+    })
 })
 
 

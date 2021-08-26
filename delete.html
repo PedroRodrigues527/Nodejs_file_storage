@@ -2,15 +2,15 @@
     <head>
     </head>
     <body>
-        <h1>Download File</h1>
-        <form method="post" action="/downloads" enctype="multipart/form-data">
+        <h1>Delete File</h1>
+        <form method="post" action="/deletefile" enctype="multipart/form-data">
             <label>Name of the file:</label><br>
             <input type="text" name="namefile" id="namefile"/>
             <br>
             <label>Type of the file: </label><br>   
             <input type="text" name="typefile" id="typefile"/>
             <br>
-            <button type="submit" class="btn btn-primary submit">Download File</button>
+            <button type="submit" class="btn btn-primary submit">Delete File</button>
         </form>
         <div>
             <p id="files"></p>
