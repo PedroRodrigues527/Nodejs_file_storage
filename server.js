@@ -41,6 +41,7 @@ app.get('/', (req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/login', function (req, res) {
+    
     username = req.body.name
     password = req.body.password
     console.log("")
@@ -49,6 +50,7 @@ app.post('/login', function (req, res) {
         console.log("Username: "+ username)
         auth = true;
         res.redirect('/connect')
+        
     }else{
         console.log("Login incorrect Please try again!")
         console.log("");
@@ -247,6 +249,9 @@ app.listen(port, function(){
     console.log("**************")
     console.log("SERVER ONLINE")
     console.log("Listening on Port " + port);
+    //npm install ip
+    var ip = require("ip");
+    console.log("Server Local IP: " + ip.address());  
 });
 
 
