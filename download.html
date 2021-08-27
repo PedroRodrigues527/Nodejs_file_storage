@@ -11,11 +11,18 @@
             <label>Type of the file: </label><br>   
             <input type="text" name="typefile" id="typefile"/>
             <br>
+            <label>Show files</label><br>
+            <input type="text" name="showfile" id="showfile"/>
+            <br>
             <button type="submit" class="btn btn-primary submit">Download File</button>
         </form>
-        <div>
-            <p id="files" action="fs.readdir(__dirname + '/uploads')"></p>
-        </div>
+
+        <form method="GET" action="/files" enctype="multipart/form-data">
+            <label>Show files</label><br>
+            <input type="submit" name="showfile" id="showfile"/>
+            <br>
+        </form>
+
         <button onclick="window.location.href='/mainmenu'">Return to Main Menu
         </button>
 

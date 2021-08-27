@@ -113,6 +113,40 @@ app.get('/download', (req, res) => {
 
 })
 
+app.get('/files', (req, res)=>{
+    if(auth==false){
+        res.redirect('/')
+    }
+    else{
+        //requiring path and fs modules
+        //const path = require('path');
+        //const fs = require('fs');
+        //joining path of directory 
+        const directoryPath = path.join(__dirname, '/uploads/');
+        var fileText = "";
+        //passsing directoryPath and callback function
+        fs.readdir(directoryPath, function (err, files) {
+            //handling error
+            if (err) {
+                return console.log('Unable to scan directory: ' + err);
+            }
+ 
+            //listing all files using forEach
+            files.forEach(function (file) {
+                // Do whatever you want to do with the file
+                fileText += file + " / "
+            });
+            //Send a report file to user
+            //var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
+            res.attachment('Files in directory ' + '.txt')
+            res.type('txt')
+            res.send(fileText)
+        });
+        res.download(__dirname + '/uploads/')
+    }
+})
+
+
 app.post('/downloads', (req, res)=>{
     if(auth==false){
         res.redirect('/')
