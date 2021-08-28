@@ -12,11 +12,38 @@ const app = express();
 var device = require('express-device')
 var i = 0
 var port = 8000
+//npm install nodemailer -> to send emails
+var nodemailer = require("nodemailer")
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'lantransferwebsite@gmail.com',
+        pass: 'webserver123'
+    }
+});
+
+var mailOptions = {
+    from: 'lantransferwebsite@gmail.com',
+    to: 'otheremail@email',
+    subject: 'Webserver eemail',
+    text: 'Some email text',
+};
+/*
+transporter.sendMail(mailOptions, (error,info)=>{
+    if(error){
+        console.log(error)
+    }else{
+        console.log('Email sent' + info.response)
+    }
+});*/
+
 
 global.auth = false;
 
 global.username = "";
 
+global.date_ob = new Date()
 
 app.use(device.capture())
 
@@ -48,6 +75,15 @@ app.post('/login', function (req, res) {
     if(username == "admin" && password == "123" || auth == true){
         console.log("*** User Connected ***")
         console.log("Username: "+ username)
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              //console.log('Email sent: ' + info.response);
+              console.log("Email sent!")
+            }
+          });
+        //console.log("Email sent!")
         auth = true;
         res.redirect('/connect')
         
@@ -216,6 +252,8 @@ app.get('/upload', (req, res) => {
 app.post('/', (req, res) =>{
     if(auth==true){
         if(req.files){
+
+
             var file = req.files.file;
             var filename = file.name;
             
@@ -244,7 +282,7 @@ app.post('/', (req, res) =>{
                     //res.send("file uploaded with sucess")
                     console.log("File Uploaded successfuly!");
                     console.log("******")
-    
+                    console.log("")
                     /*
                     //Send a report file to user
                     //var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
@@ -254,18 +292,20 @@ app.post('/', (req, res) =>{
     
     
                     //needs directory of upload folder
-                    fs.writeFile("./uploads/report"+i+".txt", text1 , function(err) {
+                    fs.writeFile("./uploads/reports/report"+i+".txt", text1 , function(err) {
                         if(err) {
                             return console.log(err);
                         }
                         //console.log("The file was saved!");
+                        //res.download(__dirname + "/uploads/reports/report"+i+".txt")
                     });
-    
-                    i++;
-    
+                    //i++;
+
                     //res.sendFile(__dirname + 'alertJSUpload');
                     //res.render("", {message: "File Uploaded successfuly"})
                 }
+                res.download(__dirname + "/uploads/reports/report"+i+".txt")
+                i++;
             });
             //return to main menu
             console.log("*********")
