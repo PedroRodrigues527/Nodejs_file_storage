@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
         var name = req.body
         console.log("user name: "+ name)
     });*/
-    res.sendFile(__dirname + '/connection.html');
+    res.sendFile(__dirname + '/view/connection.html');
     //console.log("teste1")
 })
 
@@ -77,7 +77,7 @@ app.get('/mainmenu', (req, res) => {
         res.redirect('/')
     }
     else{
-        res.sendFile(__dirname + '/main.html')
+        res.sendFile(__dirname + '/view/main.html')
 
     }
 
@@ -107,7 +107,7 @@ app.get('/download', (req, res) => {
     }
     else{
     //console.log("entering download");
-    res.sendFile(__dirname + '/download.html')
+    res.sendFile(__dirname + '/view/download.html')
     //res.send(namefile.typefile)
     }
 
@@ -170,7 +170,7 @@ app.get('/delete', (req, res)=>{
         res.redirect('/')
     }
     else{
-        res.sendFile(__dirname + '/delete.html')
+        res.sendFile(__dirname + '/view/delete.html')
     }    
 })
 
@@ -205,7 +205,7 @@ app.get('/upload', (req, res) => {
         res.redirect('/')
     }
     else{
-        res.sendFile(__dirname + '/upload.html')
+        res.sendFile(__dirname + '/view/upload.html')
     }
     //console.log("entering upload");
 })
@@ -269,7 +269,7 @@ app.post('/', (req, res) =>{
             });
             //return to main menu
             console.log("*********")
-            res.sendFile(__dirname + '/main.html');
+            res.sendFile(__dirname + '/view/main.html');
         }else{
             res.redirect('/mainmenu')
         }
