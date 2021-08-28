@@ -14,9 +14,11 @@ If the file was sucessufuly uploaded it will return to the home page
 ***Download***
 
 ...
+
 ***Delete File***
 
 ...
+
 ***Disconnect***
 
 ...
