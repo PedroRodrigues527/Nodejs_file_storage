@@ -12,8 +12,11 @@ The upload button send the file previously selected and saves it on a folder nam
 If the file was sucessufuly uploaded it will return to the home page
 
 ***Download***
+
 ...
 ***Delete File***
+
 ...
 ***Disconnect***
+
 ...
