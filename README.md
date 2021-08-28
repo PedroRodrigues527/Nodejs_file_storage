@@ -7,6 +7,7 @@ When signin it (shows on the server terminal the name of the user, local ip and 
 
 
 ***UPLOAD***
+
 The upload button send the file previously selected and saves it on a folder named uploads on the device that is hosting the server. Meanwhile in the terminal is visible the name of the file, type, the size in bytes and the user who uploaded.
 If the file was sucessufuly uploaded it will return to the home page
 
