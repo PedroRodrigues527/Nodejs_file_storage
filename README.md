@@ -13,7 +13,9 @@ If the file was sucessufuly uploaded it will return to the home page
 
 ***Download***
 
-...
+In this section it is visible two boxes to fill information about the file we want to download (the name of the file and next the type of the file)
+
+Is also avaliable a button that downloads a simple .txt file that shows the content(name and type of the file) of the uploads folder. With this information we can download the file we pretend to see
 
 ***Delete File***
 
