@@ -23,4 +23,4 @@ In this page is very similar with the previous one but instead to fill the info 
 
 ***Disconnect***
 
-...
+This options logs out from atual page and redirects to main page who we need to do the signin again to re-enter to main menu.
