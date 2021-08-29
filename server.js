@@ -297,14 +297,14 @@ app.post('/', (req, res) =>{
                             return console.log(err);
                         }
                         //console.log("The file was saved!");
-                        //res.download(__dirname + "/uploads/reports/report"+i+".txt")
+                        res.download(__dirname + "/uploads/reports/report"+i+".txt")
                     });
                     //i++;
 
                     //res.sendFile(__dirname + 'alertJSUpload');
                     //res.render("", {message: "File Uploaded successfuly"})
                 }
-                res.download(__dirname + "/uploads/reports/report"+i+".txt")
+                //res.download(__dirname + "/uploads/reports/report"+i+".txt")
                 i++;
             });
             //return to main menu
