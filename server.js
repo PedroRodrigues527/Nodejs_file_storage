@@ -18,17 +18,18 @@ var nodemailer = require("nodemailer")
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'lantransferwebsite@gmail.com',
-        pass: 'webserver123'
+        user: 'usermail@gmail.com',
+        pass: 'password_of_the_email'
     }
 });
 
 var mailOptions = {
-    from: 'lantransferwebsite@gmail.com',
+    from: 'usermail@gmail.com',
     to: 'otheremail@email',
-    subject: 'Webserver eemail',
-    text: 'Some email text',
+    subject: 'Some_subject',
+    text: 'Some_text',
 };
+
 /*
 transporter.sendMail(mailOptions, (error,info)=>{
     if(error){
@@ -75,6 +76,7 @@ app.post('/login', function (req, res) {
     if(username == "admin" && password == "123" || auth == true){
         console.log("*** User Connected ***")
         console.log("Username: "+ username)
+        /*
         transporter.sendMail(mailOptions, function(error, info){
             if (error) {
               console.log(error);
@@ -82,7 +84,7 @@ app.post('/login', function (req, res) {
               //console.log('Email sent: ' + info.response);
               console.log("Email sent!")
             }
-          });
+          });*/
         //console.log("Email sent!")
         auth = true;
         res.redirect('/connect')
