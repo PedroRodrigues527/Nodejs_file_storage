@@ -12,18 +12,18 @@ When signin it (shows on the server terminal the name of the user, local ip and 
 ### Some functions in the web server.
 ***UPLOAD***
 
-The upload button send the file previously selected and saves it on a folder named uploads on the device that is hosting the server. Meanwhile in the terminal is visible the name of the file, type, the size in bytes and the user who uploaded.
+The upload button send the file previously selected and saves it on a folder named 'uploads' on the device that is hosting the server. Meanwhile in the terminal is visible the name of the file, type, the size in bytes and the user who uploaded.
 If the file was sucessufuly uploaded it will return to the home page.
 
 ***DOWNLOAD***
 
 In this section it is visible two boxes to fill information about the file we want to download (the name of the file and next the type of the file).
 
-Is also avaliable a button that downloads a simple .txt file that shows the content(name and type of the file) of the uploads folder. With this information we can download the file we pretend to see.
+Is also avaliable a button that downloads a simple .txt file that shows the content(name and type of the file) of the uploads folder. With this information we can download the file we pretend to see, by filling the form.
 
 ***DELETE FILE***
 
-In this page is very similar with the previous one but instead to fill the info to download a certain file we delete it from the host computer.
+This page is very similar with the previous one but instead filling the info to download a certain file we delete it from the host computer.
 
 ***DISCONNECT***
 
