@@ -1,6 +1,6 @@
 # LAN_Transfer_WebSite
 
-## 1)The program, how it works
+## 1)The program, how it works.
 
 Enables the device with is hosting the server to save and transfer files to other devices in the same LAN.
 
@@ -27,4 +27,4 @@ In this page is very similar with the previous one but instead to fill the info 
 
 This options logs out from atual page and redirects to main page who we need to do the signin again to re-enter to main menu.
 
-## 2)How to run the server and what i need to have to properly run
+## 2)How to run the server and what you need to properly run it.
