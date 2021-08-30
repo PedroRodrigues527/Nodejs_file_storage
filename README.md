@@ -5,7 +5,7 @@ When activated the server on terminal, we will redirected to a web page (main.ht
 
 When signin it (shows on the server terminal the name of the user, local ip and device name) has 3 options to upload, download, delete file and disconnect.
 
-##1) The program, how it works
+## 1)The program, how it works
 
 ***UPLOAD***
 
@@ -26,4 +26,4 @@ In this page is very similar with the previous one but instead to fill the info 
 
 This options logs out from atual page and redirects to main page who we need to do the signin again to re-enter to main menu.
 
-##2)How to run the server and what i need to have to properly run
+## 2)How to run the server and what i need to have to properly run
