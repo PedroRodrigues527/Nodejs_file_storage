@@ -3,7 +3,7 @@
 ## 1)The program, and his functions.
 
 ### General overview of the program.
-The device that is hosting the server will be able to store and manage files(upload, download, delete and see the content) in the 'uploads' folder in the host machine. This files in this folder can be accessed by other devices, if they are connected in the same network by using (in the browser) the ip visible in the terminal with ':' plus the port. Example, if host IP address 192.168.1.2 and the port 8000, then search 192.168.1.2:8000.(or localhost:port, if we wanted to access in the host device)
+The device that is hosting the server will be able to store and manage files(upload, download, delete and see the content) in the 'uploads' folder in the host machine. This files in this folder can be accessed by other devices, if they are connected in the same network by using (in the browser) the ip visible in the terminal with ':' plus the port. Example, if host IP address 192.168.1.2 and the port 8000, then search 192.168.1.2:8000.(or localhost:8000, if we wanted to access in the host device)
 
 When activated the server on terminal, we will redirected to a web page (main.html) that have a simple login form(with username and password by default: admin and 123 respectevly).
 
