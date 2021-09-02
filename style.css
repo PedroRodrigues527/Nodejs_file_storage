@@ -1,5 +1,59 @@
 *{
-    font-family: 'Courier New', Courier, monospace;
+    /*font-family: 'Courier New', Courier, monospace;*/
+}
+
+.header{
+    display: flex;
+    padding: 2% 6%;
+    text-align: justify;
+    background-color: rgba(131, 245, 245, 0.659);
+}
+
+#title{
+    padding-top: 0.4px;
+    padding-right: 30px;
+}
+
+#info{
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.options{
+    flex: 1;
+}
+
+/* Options aligned */
+.options ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+
+.options ul li a{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.options ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: rgb(21, 130, 232);
+    display: block;
+    margin: auto;
+    transition: 0.2s;
+}
+
+.options ul li:hover::after{
+    width: 100%;
+}
+
+body{
+    background: rgb(178, 230, 232);
 }
 
 .connectionSec{
