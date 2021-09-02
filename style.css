@@ -59,11 +59,9 @@ body{
 
 .connectionSec{
     padding: 10px;
-    font-family: 'Courier New', Courier, monospace;
 }
 .connectionSec h1{
     font-size: 30px;
-    font-family: 'Courier New', Courier, monospace;
 }
 
 .button{
@@ -73,16 +71,13 @@ body{
 @media(max-width: 700px){
     .connectionSec{
         padding: 20px;
-        font-family: 'Courier New', Courier, monospace;
     }
 
     .connectionSec h1{
         font-size: 40px;
-        font-family: 'Courier New', Courier, monospace;
     }
 
     .connectionSec p{
         font-size: 20px;
-        font-family: 'Courier New', Courier, monospace;
     }
 } 
