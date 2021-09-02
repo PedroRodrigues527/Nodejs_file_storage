@@ -30,3 +30,6 @@ This page is very similar with the previous one but instead filling the info to 
 This options logs out from atual page and redirects to main page who we need to do the signin again to re-enter to main menu.
 
 ## 2)How to run the server and what you need to properly run it.
+Get to know the file path to the folder.
+Install node.js
+After installing node.js open cmd and type: 'node ' plus the path and add '/server.js'
