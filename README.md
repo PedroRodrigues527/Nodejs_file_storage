@@ -31,5 +31,7 @@ This options logs out from atual page and redirects to main page who we need to 
 
 ## 2)How to run the server and what you need to properly run it.
 Get to know the file path to the folder.
+
 Install node.js
+
 After installing node.js open cmd and type: 'node ' plus the path and add '/server.js'
