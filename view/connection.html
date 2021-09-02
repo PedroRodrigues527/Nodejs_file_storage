@@ -3,12 +3,12 @@
         <link rel="stylesheet" type="text/css" href="style.css"/>
     </head>
     <body>
-        <section class="connectionSec">
-            <div class="text">
+        <section class="header">
+            <div class="headerConnect">
                 <h1 id="connectH1">LAN Transfer</h1>
-                <p>To connect to the server and enables files transfer from devices please press the bottom 'connect'</p>
+                <p id="description">To connect to the server and enables files transfer from devices please press the bottom 'connect'</p>
             </div>
-            
+        </section>
             <form action="/login" method="post">
                 <label for="frame">Username:</label><br>
                 <input type="text" name="name" id="name"/>
@@ -16,18 +16,11 @@
                 <label for="frame">Password:</label><br>
                 <input type="password" name="password" id="password"/>
                 <br>
-                <button type="submit" class="btn btn-primary submit">Login</button>
+                <div id="loginButton">
+                    <button type="submit" class="btn btn-primary submit" onclick="verifyLogin()">Login</button>
+                </div>
             </form>
-
-            <!-- 
-            <div class="button">
-                <button onclick="window.location.href='/connect'">See data</button>
-            </div>
-
-            <div class="button">
-                <button onclick="window.location.href='/connect'">Connect</button>
-            </div>-->
-
-        </section> 
     </body>
+    <script src="/loginhtml.js">
+    </script>
 </html>
