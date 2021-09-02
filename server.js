@@ -90,7 +90,7 @@ app.post('/login', function (req, res) {
         res.redirect('/connect')
         
     }else{
-        console.log("Login incorrect Please try again!")
+        //console.log("Login incorrect Please try again!")
         console.log("");
         res.redirect('/')
     }
