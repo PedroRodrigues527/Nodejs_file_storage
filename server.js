@@ -151,6 +151,39 @@ app.get('/download', (req, res) => {
 
 })
 
+//List all files in a path and delete every file in it
+app.get('/deleteall', (req, res) =>{
+    var fileSeq = 0;
+    //number of files in the upload folder
+    fs.readdir(__dirname + '/uploads', function(err, files){
+        if (err){
+            console.log(err)
+        }
+        console.log("Number of files: " + files.length);//number of files in the 'upload' folder
+        console.log("")
+        files.forEach(function(file){
+        fileSeq++;
+        console.log("SEQ: " + fileSeq)
+            if(fileSeq != files.length){
+
+                fs.unlink(__dirname + '/uploads/'+ file, (err)=>{
+                    if (err) {
+                        console.error(err)
+                    }
+                    console.log(fileSeq+1 + ")" + "File: " + file + " DELETED")
+                    fileSeq++;
+                    console.log("fileSeq: " + fileSeq)
+                })
+                //console.log("ALL " + k + " FILES DELETED")
+                
+            }
+            console.log("ALL " + fileSeq + " FILES DELETED")
+        })
+    })
+    //console.log("ALL " + fileSeq + " FILES DELETED")
+    res.redirect('/mainmenu');
+})
+
 app.get('/files', (req, res)=>{
     if(auth==false){
         res.redirect('/')
@@ -299,19 +332,19 @@ app.post('/', (req, res) =>{
     
     
                     //needs directory of upload folder
-                    fs.writeFile("./uploads/reports/report"+i+".txt", text1 , function(err) {
+                    fs.writeFile("./reports/report"+i+".txt", text1 , function(err) {
                         if(err) {
                             return console.log(err);
                         }
                         //console.log("The file was saved!");
-                        res.download(__dirname + "/uploads/reports/report"+i+".txt")
+                        res.download(__dirname + "/reports/report"+i+".txt")
                     });
                     //i++;
 
                     //res.sendFile(__dirname + 'alertJSUpload');
                     //res.render("", {message: "File Uploaded successfuly"})
                 }
-                //res.download(__dirname + "/uploads/reports/report"+i+".txt")
+                //res.download(__dirname + "/reports/report"+i+".txt")
                 i++;
             });
             //return to main menu
