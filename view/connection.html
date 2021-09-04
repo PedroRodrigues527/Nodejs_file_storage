@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="style.css"/>
+        <script src="/loginhtml.js"></script>
     </head>
     <body>
         <section class="header">
@@ -17,10 +18,8 @@
                 <input type="password" name="password" id="password"/>
                 <br>
                 <div id="loginButton">
-                    <button type="submit" class="btn btn-primary submit" onclick="verifyLogin()">Login</button>
+                    <button type="submit" class="btn btn-primary submit" onclick="verifyLogin() ; getUsername()">Login</button>
                 </div>
             </form>
     </body>
-    <script src="/loginhtml.js">
-    </script>
 </html>
