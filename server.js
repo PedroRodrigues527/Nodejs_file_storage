@@ -69,11 +69,11 @@ app.get('/', (req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/login', function (req, res) {
-    
     username = req.body.name
     password = req.body.password
-    console.log("")
+
     if(username == "admin" && password == "123" || auth == true){
+        console.log("")
         console.log("*** User Connected ***")
         console.log("Username: "+ username)
         /*
@@ -91,7 +91,7 @@ app.post('/login', function (req, res) {
         
     }else{
         //console.log("Login incorrect Please try again!")
-        console.log("");
+        //console.log("");
         res.redirect('/')
     }
 });
@@ -188,6 +188,11 @@ app.get('/files', (req, res)=>{
 app.post('/downloads', (req, res)=>{
     if(auth==false){
         res.redirect('/')
+    }
+    else if(req.body.namefile == "" || req.body.typefile == ""){
+        //alert user to fill the form
+        res.redirect('/download')
+        //res.redirect('/download')
     }
     else{
         Namefile = req.body.namefile

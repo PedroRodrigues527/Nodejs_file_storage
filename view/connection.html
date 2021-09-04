@@ -11,15 +11,22 @@
             </div>
         </section>
             <form action="/login" method="post">
-                <label for="frame">Username:</label><br>
-                <input type="text" name="name" id="name"/>
-                <br>
-                <label for="frame">Password:</label><br>
-                <input type="password" name="password" id="password"/>
-                <br>
-                <div id="loginButton">
-                    <button type="submit" class="btn btn-primary submit" onclick="verifyLogin() ; getUsername()">Login</button>
-                </div>
+                <section class="mainmenuLogin">
+                    <div id="userInput">
+                        <label for="frame">Username:</label>
+                        <input type="text" name="name" id="name"/>
+                        <br>
+                    </div>
+                    <div id="passwordInput">
+                        <label for="frame">Password:</label>
+                        <input type="password" name="password" id="password"/>
+                        <br>
+                    </div>
+                    <div id="loginButton">
+                        <button type="submit" class="btn btn-primary submit" onclick="verifyLogin() ; getUsername()">Login</button>
+                    </div> 
+                </section>
             </form>
     </body>
+    <script src="/loginhtml.js"></script>
 </html>
