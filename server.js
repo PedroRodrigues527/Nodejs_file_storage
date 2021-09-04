@@ -150,6 +150,7 @@ app.get('/download', (req, res) => {
     }
 
 })
+var uploadSize = 0
 
 //List all files in a path and delete every file in it
 app.get('/deleteall', (req, res) =>{
@@ -161,26 +162,31 @@ app.get('/deleteall', (req, res) =>{
         }
         console.log("Number of files: " + files.length);//number of files in the 'upload' folder
         console.log("")
+        uploadSize = files.length;
         files.forEach(function(file){
-        fileSeq++;
-        console.log("SEQ: " + fileSeq)
+        //fileSeq++;
+        //console.log("SEQ: " + fileSeq)
             if(fileSeq != files.length){
-
                 fs.unlink(__dirname + '/uploads/'+ file, (err)=>{
                     if (err) {
                         console.error(err)
                     }
                     console.log(fileSeq+1 + ")" + "File: " + file + " DELETED")
                     fileSeq++;
-                    console.log("fileSeq: " + fileSeq)
+                    //console.log("fileSeq: " + fileSeq)
                 })
                 //console.log("ALL " + k + " FILES DELETED")
                 
             }
-            console.log("ALL " + fileSeq + " FILES DELETED")
         })
     })
     //console.log("ALL " + fileSeq + " FILES DELETED")
+
+    res.redirect('/deletedallfiles');
+})
+
+app.get('/deletedallfiles', (req, res)=>{
+    console.log("ALL " + uploadSize + " FILES DELETED")
     res.redirect('/mainmenu');
 })
 
