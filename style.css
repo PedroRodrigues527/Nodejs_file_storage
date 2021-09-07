@@ -17,6 +17,13 @@
     padding-top: 10px;
 }
 
+.uploadForm{
+    border: 2px;
+    border-color: black;
+    padding-top: 10px;
+    text-align: center;
+}
+
 .options{
     flex: 1;
     text-align: center;
