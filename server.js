@@ -115,6 +115,7 @@ app.get('/connect', (req, res)=>{
     }
 })
 
+//https://www.geeksforgeeks.org/how-to-pass-access-node-js-variable-to-an-html-file-template/
 app.get('/mainmenu', (req, res) => {
     if(auth==false){
         res.redirect('/')
