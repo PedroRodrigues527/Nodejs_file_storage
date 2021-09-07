@@ -24,6 +24,12 @@
     text-align: center;
 }
 
+.downloadForm{
+    padding-top: 10px;
+    text-align: center;
+}
+
+
 .options{
     flex: 1;
     text-align: center;
@@ -105,9 +111,10 @@ body{
 .button{
     text-align: center;
 }
-/*
+
 @media(max-width: 700px){
-    .connectionSec{
+    
+    /*.connectionSec{
         padding: 20px;
     }
 
@@ -117,5 +124,17 @@ body{
 
     .connectionSec p{
         font-size: 20px;
+    }*/
+
+    .downloadForm{
+        font-size: 20px;
+        padding-top: 10px;
+        text-align: center;
     }
-} */
+
+    .uploadForm{
+        font-size: 20px;
+        padding-top: 10px;
+        text-align: center;
+    }
+} 

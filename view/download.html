@@ -3,17 +3,35 @@
         <link rel="stylesheet" type="text/css" href="style.css"/>
     </head>
     <body>
-        <h1>Download File</h1>
-        <form method="post" action="/downloads" enctype="multipart/form-data">
-            <label>Name of the file:</label><br>
-            <input type="text" name="namefile" id="namefile"/>
-            <br>
-            <label>Type of the file: </label><br>   
-            <input type="text" name="typefile" id="typefile"/>
-            <br>
-            <br>
-            <button type="submit" class="btn btn-primary submit">Download File</button>
-        </form>
+
+        <div class="header">
+            <h1>Download File</h1>
+        </div>
+
+        <section class="downloadForm">
+            <form method="post" action="/downloads" enctype="multipart/form-data">
+                
+                <div id="nameFileDownload">
+                    <label>Name of the file:</label><br>
+                    <input type="text" name="namefile" id="namefile"/>
+                </div>
+
+                <br>
+
+                <div id="typeFileDownload">
+                    <label>Type of the file: </label><br>   
+                    <input type="text" name="typefile" id="typefile"/>
+                </div>
+
+                <br>
+                <br>
+
+                <div id="downloadButton">
+                    <button type="submit" class="btn btn-primary submit">Download File</button>
+                </div>
+        
+            </form>
+        </section>
         
         <div class="options">
             <ul>
