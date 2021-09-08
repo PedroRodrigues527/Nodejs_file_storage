@@ -1,22 +1,22 @@
 function verifyLogin(){
     //alert("teste executado " + document.getElementById('name').value);
-    var username = "" + document.getElementById('name').value
+    //var username = "" + document.getElementById('name').value
     var password = "" + document.getElementById('password').value
-    if(username == '' || password ==''){
+    if(password ==''){
         alert("Please complete the login!");
     }
-    else if(username != 'admin' || password!= '123' ){
+    else if(password != '123' ){
         alert("Login incorrect Please try again!");
     }
 }
 
-
+/*
 function getUsername(){
     var username = "" + document.getElementById('name').value;
     //alert("username: " + username + ", type: " + typeof(username));
     document.getElementById('info').innerHTML += username;
     return username;
-}
+}*/
 
 //export var userinput = getUsername();
 

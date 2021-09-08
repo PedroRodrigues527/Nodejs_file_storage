@@ -80,7 +80,7 @@ app.post('/login', function (req, res) {
     username = req.body.name
     password = req.body.password
 
-    if(username == "admin" && password == "123" || auth == true){
+    if(username !="" &&password == "123" || auth == true){
         console.log("")
         console.log("*** User Connected ***")
         console.log("Username: "+ username)
