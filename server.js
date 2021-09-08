@@ -18,6 +18,7 @@ var nodemailer = require("nodemailer")
 var crypto = require("crypto"); //to generate random letters
 global.checkCode  = crypto.randomBytes(20).toString('hex');
 
+//install npm install ejs
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -56,6 +57,8 @@ app.use(device.capture())
 app.use(upload())
 
 app.use(express.static(__dirname + '/'));
+
+app.engine('html', require('ejs').renderFile);
 
 const bodyParser = require('body-parser');
 
@@ -121,8 +124,8 @@ app.get('/mainmenu', (req, res) => {
         res.redirect('/')
     }
     else{
-        res.sendFile(__dirname + '/view/main.html')
-
+        //res.sendFile(__dirname + '/view/main.html')
+        res.render(__dirname + '/view/main.html', {username:username})
     }
 
     //console.log("IP conected: " + req.connection.remoteAddress)

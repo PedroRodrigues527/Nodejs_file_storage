@@ -25,7 +25,13 @@
     <script type="text/javascript" src="/loginhtml.js"></script>
     <script>
       //const {userinput} = require('/loginhtml.js');
-      import userinput from '/loginhtml.js'
-      document.getElementById("info").textContent += userinput;
+      
+      //import userinput from '/loginhtml.js'
+
+      //Get user name and put on p tag 
+      var usernameInput = " <%= username %> "
+      document.getElementById("info").textContent += usernameInput;
+      
+
     </script>
 </html>
