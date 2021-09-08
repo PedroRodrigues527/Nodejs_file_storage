@@ -18,13 +18,11 @@
 }
 
 .uploadForm{
-    border: 2px;
-    border-color: black;
     padding-top: 10px;
     text-align: center;
 }
 
-.downloadForm{
+.downloadForm{ /*Includes verifyCode.html code form*/
     padding-top: 10px;
     text-align: center;
 }
@@ -109,6 +107,11 @@ body{
 }
 
 .button{
+    text-align: center;
+}
+
+.codeBox{
+    padding-top: 10px;
     text-align: center;
 }
 
