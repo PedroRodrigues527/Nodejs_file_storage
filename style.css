@@ -143,14 +143,14 @@ body{
     text-align: center;
 }
 
-@media(max-width: 1000px){
+@media(max-width: 700px){
     
     .connectionSec{
         padding: 20px;
     }
 
     .connectionSec h1{
-        font-size: 40px;
+        font-size: 25px;
     }
 
     .connectionSec p{
@@ -158,13 +158,13 @@ body{
     }
 
     .options{
-        font-size: 40px;
+        font-size: 25px;
     }
 
     .options ul li a{
         color: black;
         text-decoration: none;
-        font-size: 40px;
+        font-size: 25px;
     }
 
     .downloadForm{

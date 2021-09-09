@@ -413,7 +413,7 @@ app.post('/', (req, res) =>{
                 else{
                     //res.send("file uploaded with sucess")
                     console.log("File Uploaded successfuly!");
-                    console.log("******")
+                    //console.log("******")
                     console.log("")
                     /*
                     //Send a report file to user
