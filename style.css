@@ -9,13 +9,29 @@
     background-color: rgba(131, 245, 245, 0.659);
 }
 
+.userInfo{
+    border-style: double;
+    border-radius: 5px;
+    border-color: black;
+    width: 30%;
+    margin: auto;
+    margin-top: 10px;
+}
+
 #title{
     padding-top: 0.4px;
 }
 
 #info{
-    padding-top: 10px;
-    font-size: 20px;
+    font-size: 15px;
+}
+
+#userip{
+    font-size: 15px;
+}
+
+#hostip{
+    font-size: 15px;
 }
 
 .uploadForm{
