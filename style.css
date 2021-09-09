@@ -143,9 +143,7 @@ body{
     text-align: center;
 }
 
-
-/*
-@media(max-width: 700px){
+@media(max-width: 1000px){
     
     .connectionSec{
         padding: 20px;
@@ -159,6 +157,16 @@ body{
         font-size: 20px;
     }
 
+    .options{
+        font-size: 40px;
+    }
+
+    .options ul li a{
+        color: black;
+        text-decoration: none;
+        font-size: 40px;
+    }
+
     .downloadForm{
         font-size: 20px;
         padding-top: 10px;
@@ -170,4 +178,20 @@ body{
         padding-top: 10px;
         text-align: center;
     }
-} */
+
+    #title{
+        padding-top: 0.4px;
+    }
+    
+    #info{
+        font-size: 20px;
+    }
+    
+    #userip{
+        font-size: 20px;
+    }
+    
+    #hostip{
+        font-size: 20px;
+    }
+} 
