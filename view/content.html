@@ -36,6 +36,27 @@
 
     <script>
         var textFiles = " <%= fileText %> "
-        document.getElementById("content").textContent += textFiles;
+        var filesize = " <%= uploadSize %> "
+        var array = " <%= fileArray %> " 
+
+        /*for(i = 0; i <= filesize-1 ; i++){
+            var tag = document.createElement("p"); // <p></p>
+            var text = document.createTextNode(array[i]); 
+            tag.appendChild(text); //
+        }*/
+
+        document.getElementById("content").textContent += array;
+
+        /*
+        for(i = 0; i <= filesize-1 ; i++){
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(array[i]);
+            a.appendChild(linkText);
+            let file = array[i]
+            a.title = "file";
+            a.href = "file:///" + "/uploads/*";
+            document.body.appendChild(a);
+        }*/
+
     </script>
 </html>

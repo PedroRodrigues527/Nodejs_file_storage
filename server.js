@@ -20,7 +20,9 @@ var ip = require("ip");
 var Hostip = ip.address()
 var userIp;
 
+var uploadSize = 0;
 var fileText = "";
+var fileArray = [];
 
 var crypto = require("crypto"); //to generate random letters
 global.checkCode  = crypto.randomBytes(20).toString('hex');
@@ -249,18 +251,25 @@ app.get('/files', (req, res)=>{
         res.redirect('/')
     }
     else{
+        var i = 0;
         const directoryPath = path.join(__dirname, '/uploads/');
         //var fileText = "";
+
         fs.readdir(directoryPath, function (err, files) {
             //handling error
             if (err) {
                 return console.log('Unable to scan directory: ' + err);
             }
- 
+            
+            uploadSize = files.length;
             //listing all files using forEach
             files.forEach(function (file) {
-                fileText += file + "  /  "
+                fileArray[i] = file  + "    "
+                i++;
+                //fileText += file + "  /  "
             });
+
+            
             //console.log("all files: " + fileText)
             res.redirect('/contentHtml')
         });
@@ -296,7 +305,7 @@ app.get('/files', (req, res)=>{
 })
 
 app.get('/contentHtml', (req, res)=>{
-    res.render(__dirname + '/view/content.html', {fileText:fileText})
+    res.render(__dirname + '/view/content.html', {fileText:fileText, uploadSize:uploadSize, fileArray:fileArray})
 })
 
 //To download file
