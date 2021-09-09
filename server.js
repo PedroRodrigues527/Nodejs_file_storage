@@ -20,6 +20,8 @@ var ip = require("ip");
 var Hostip = ip.address()
 var userIp;
 
+var fileText = "";
+
 var crypto = require("crypto"); //to generate random letters
 global.checkCode  = crypto.randomBytes(20).toString('hex');
 
@@ -34,7 +36,7 @@ var transporter = nodemailer.createTransport({
 });
 
 //Send Email with code to delete all files
-var mailOptions = { 
+var mailOptionsCodeDelete = { 
     from: 'youremail@gmail.com',
     to: 'xxx@gmail.com',
     subject: 'VerifyCode',
@@ -170,12 +172,14 @@ app.get('/download', (req, res) => {
 //Verify user by sending email (previously inserted - above) with 20 caracters code. If correct inserted then it deletes all files
 app.get('/deleteCheck', (req, res) =>{
     if(auth){
-        transporter.sendMail(mailOptions, function(error, info){
+        transporter.sendMail(mailOptionsCodeDelete, function(error, info){
             if (error) {
               console.log(error);
             } else {
               //console.log('Email sent: ' + info.response);
-              console.log("Code sent!")
+              console.log("*** CODE REQUEST ***")
+              console.log("CODE REQUESTED BY: "+ username )
+              console.log("Purpose: DELETE ALL FILES ")
             }
           });
         res.sendFile(__dirname + '/view/verifyCode.html')
@@ -245,6 +249,24 @@ app.get('/files', (req, res)=>{
         res.redirect('/')
     }
     else{
+        const directoryPath = path.join(__dirname, '/uploads/');
+        //var fileText = "";
+        fs.readdir(directoryPath, function (err, files) {
+            //handling error
+            if (err) {
+                return console.log('Unable to scan directory: ' + err);
+            }
+ 
+            //listing all files using forEach
+            files.forEach(function (file) {
+                fileText += file + "  /  "
+            });
+            //console.log("all files: " + fileText)
+            res.redirect('/contentHtml')
+        });
+        //res.render(__dirname + '/view/content.html', {fileText:fileText})
+        
+        /*
         //requiring path and fs modules
         //const path = require('path');
         //const fs = require('fs');
@@ -269,8 +291,12 @@ app.get('/files', (req, res)=>{
             res.type('txt')
             res.send(fileText)
         });
-        res.download(__dirname + '/uploads/')
+        res.download(__dirname + '/uploads/')*/
     }
+})
+
+app.get('/contentHtml', (req, res)=>{
+    res.render(__dirname + '/view/content.html', {fileText:fileText})
 })
 
 //To download file
@@ -406,7 +432,7 @@ app.post('/', (req, res) =>{
             });
             //return to main menu
             console.log("*********")
-            res.sendFile(__dirname + '/view/main.html');
+            res.render(__dirname + '/view/main.html', {username:username,Hostip:Hostip,userIp:userIp})
         }else{
             res.redirect('/mainmenu')
         }

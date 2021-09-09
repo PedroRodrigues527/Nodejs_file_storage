@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>Files on System</h1>
+        </div>
+
+        <div class="filesSystem">
+            <p id="content"></p>
+        </div>
+
+        <!-- 
+            <section class="downloadForm">
+            <div  id="codeBox">
+                <form method="post" action="/deleteCheck" enctype="multipart/form-data">
+                    <label>Code: </label><br>
+                    <input type="text" name="verifyCode" id="verifyCode"/>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary submit">Check Code</button>
+                </form>
+            </div>
+        </section>
+        -->
+    
+        <div class="options">
+            <ul>
+                <li> <a href="mainmenu">Return to Main Menu</a></li>
+            </ul>
+        </div>
+
+    </body>
+
+    <script>
+        var textFiles = " <%= fileText %> "
+        document.getElementById("content").textContent += textFiles;
+    </script>
+</html>
