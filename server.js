@@ -15,6 +15,11 @@ var port = 8000
 //npm install nodemailer -> to send emails
 var nodemailer = require("nodemailer")
 
+//npm install ip
+var ip = require("ip");
+var Hostip = ip.address()
+var userIp;
+
 var crypto = require("crypto"); //to generate random letters
 global.checkCode  = crypto.randomBytes(20).toString('hex');
 
@@ -111,6 +116,7 @@ app.get('/connect', (req, res)=>{
     else{
         //console.log("fileName: " + req.body.filename)
         //console.log("Name: " + req.body.name)
+        userIp = req.connection.remoteAddress
         console.log("IP: " + req.connection.remoteAddress)
         console.log("Device: "+req.device.type.toUpperCase())
         console.log("");
@@ -125,7 +131,7 @@ app.get('/mainmenu', (req, res) => {
     }
     else{
         //res.sendFile(__dirname + '/view/main.html')
-        res.render(__dirname + '/view/main.html', {username:username})
+        res.render(__dirname + '/view/main.html', {username:username,Hostip:Hostip,userIp:userIp})
     }
 
     //console.log("IP conected: " + req.connection.remoteAddress)
@@ -415,7 +421,7 @@ app.listen(port, function(){
     console.log("SERVER ONLINE")
     console.log("Listening on Port " + port);
     //npm install ip
-    var ip = require("ip");
+    //var Hostip = require("ip");
     console.log("Server Local IP: " + ip.address());  
 });
 

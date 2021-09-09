@@ -7,7 +7,9 @@
     <body>
       <section class="header">
         <h1 id="title">Main Menu</h1>
+        <p id="hostip">Server IP: </p>
         <p id="info">User: </p>
+        <p id="userip">User IP: </p>
       </section>
       <section class="options">
         <i class="options-options"></i>
@@ -31,7 +33,9 @@
       //Get user name and put on p tag 
       var usernameInput = " <%= username %> "
       document.getElementById("info").textContent += usernameInput;
-      
-
+      var ip = " <%= Hostip %> "
+      document.getElementById("hostip").textContent += ip;
+      var userip = " <%= userIp %> "
+      document.getElementById("userip").textContent += userip;
     </script>
 </html>
