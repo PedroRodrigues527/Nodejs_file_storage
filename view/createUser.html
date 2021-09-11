@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>Create User</h1>
+        </div>
+
+        <section class="downloadForm">
+            <form method="post" action="/createUser" enctype="multipart/form-data">
+                
+                <div id="nameUser">
+                    <label>Name: </label><br>
+                    <input type="text" name="nameUser" id="nameUser"/>
+                </div>
+
+                <br>
+
+                <div id="passwordUser">
+                    <label>password: </label><br>   
+                    <input type="password" name="passUser" id="passUser"/>
+                </div>
+
+                <br>
+
+                <div id="emailUser">
+                    <label>Email: </label><br>   
+                    <input type="email" name="emailUser" id="emailUser"/>
+                </div>
+
+                <br>
+                <br>
+
+                <div id="downloadButton">
+                    <button type="submit" class="btn btn-primary submit">Submit registration</button>
+                </div>
+        
+            </form>
+        </section>
+        
+        <div class="options">
+            <ul>
+                <li> <a href="/">Return to Initial screen</a></li>
+            </ul>
+        </div>
+
+        <!--
+        <a href="/uploads/hp.txt">Download all folder</a>
+        <button onclick="showFiles()">Show files in folder</p>
+        <button onclick="window.location.href='/'">Return to Main Menu
+        </button>
+        -->
+    </body>
+    <script>/*
+        //requiring path and fs modules
+        const path = require('path');
+        const fs = require('fs');
+        //joining path of directory 
+        const directoryPath = path.join(__dirname, '/uploads');
+        //passsing directoryPath and callback function
+        fs.readdir(directoryPath, function (err, files) {
+            //handling error
+            if (err) {
+                return console.log('Unable to scan directory: ' + err);
+            } 
+            //listing all files using forEach
+            files.forEach(function (file) {
+                // Do whatever you want to do with the file
+                document.getElementById("files").textContent += file
+            });
+        });*/
+    </script>
+</html>

@@ -11,9 +11,14 @@ const app = express();
 /*npm i --S express-device , npm install i --S express-device*/
 var device = require('express-device')
 var i = 0
+var userNumbers = 0
 var port = 8000
 //npm install nodemailer -> to send emails
 var nodemailer = require("nodemailer")
+
+var username = ""
+var password = ""
+var emailUser = ""
 
 //npm install ip
 var ip = require("ip");
@@ -79,20 +84,99 @@ app.get('/', (req, res) => {
         var name = req.body
         console.log("user name: "+ name)
     });*/
+    //res.sendFile(__dirname + '/view/createUser.html');
     res.sendFile(__dirname + '/view/connection.html');
     //console.log("teste1")
 })
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/createUser', (req, res) =>{
+    res.sendFile(__dirname + "/view/createUser.html")
+})
+
+app.post('/createUser', (req, res) =>{
+    username = req.body.nameUser
+    password = req.body.passUser
+    emailUser = req.body.emailUser
+
+    console.log("")
+    console.log("Registration")
+    console.log("Username: " + username)
+    console.log("Password: " + password)
+    console.log("Email user: " + emailUser)
+
+    var directoryPath = path.join(__dirname, '/users/');
+
+    //check if exist same name or email **********
+    fs.readdir(directoryPath, function (err, files) {
+        console.log("1")
+        //handling error
+        text1 = "User: " + username + " / " + " Password: " + password + " / " + " Email: " + emailUser
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+            
+        }
+        /*
+        if(files.length == 0){
+            //if not, create file txt that saves info the go to /login **********
+            //needs directory of upload folder
+            //text1 = "User: " + username + " / " + " Password: " + password + " / " + " Email: " + emailUser
+            //console.log("4")
+            fs.writeFile(__dirname + "/users/user" + userNumbers + ".txt", text1 , function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+                console.log("Entrou vazio");
+                userNumbers++
+                res.download(__dirname + "/users/user")
+                res.redirect('/')
+            });
+            //console.log("5")
+        }*/
+        else{
+            //var fileControl = 0;
+            //listing all files using forEach
+            console.log("Entrou com");
+            files.forEach(function (file) {
+                //console.log("2")
+                fs.readFile(path.join(directoryPath + file), function (err, data) {
+                    if (err) return console.log(err);
+                    
+                    if(data.includes(username) || data.includes(emailUser)){ //exist other account with the same username
+                        console.log(data)
+                        console.log("already exist same username or email")
+                        res.sendFile(__dirname + '/view/connection.html');
+                    }
+                    else{
+                        console.log("Entrou direito");
+                        //text1 = "User: " + username + " / " + " Password: " + password + " / " + " Email: " + emailUser
+                        //console.log("4")
+                        fs.writeFile(directoryPath + "/user" + userNumbers + '.txt', text1 , function(err) {
+                            if(err) {
+                                return console.log(err);
+                            }
+                            //console.log("The file was saved!");
+                            userNumbers++
+                            //res.download(__dirname + "/users/user")
+                        });
+                    }
+                });
+            });
+        }
+    });
+    res.redirect('/')
+})
+
 app.post('/login', function (req, res) {
-    username = req.body.name
-    password = req.body.password
+    /*username = req.body.name
+    password = req.body.password*/
 
     if(username !="" &&password == "123" || auth == true){
         console.log("")
         console.log("*** User Connected ***")
         console.log("Username: "+ username)
+
         /*
         transporter.sendMail(mailOptions, function(error, info){
             if (error) {
@@ -440,7 +524,7 @@ app.post('/', (req, res) =>{
                 i++;
             });
             //return to main menu
-            console.log("*********")
+            //console.log("*********")
             res.render(__dirname + '/view/main.html', {username:username,Hostip:Hostip,userIp:userIp})
         }else{
             res.redirect('/mainmenu')
