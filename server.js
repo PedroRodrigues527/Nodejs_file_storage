@@ -20,6 +20,11 @@ var username = ""
 var password = ""
 var emailUser = ""
 
+var usernameInput = ""
+var passwordInput = ""
+
+var text1 = ""
+
 //npm install ip
 var ip = require("ip");
 var Hostip = ip.address()
@@ -75,6 +80,7 @@ app.use(express.static(__dirname + '/'));
 app.engine('html', require('ejs').renderFile);
 
 const bodyParser = require('body-parser');
+const { strictEqual } = require('assert');
 
 
 app.get('/', (req, res) => {
@@ -110,34 +116,17 @@ app.post('/createUser', (req, res) =>{
 
     //check if exist same name or email **********
     fs.readdir(directoryPath, function (err, files) {
-        console.log("1")
+        //console.log("1")
         //handling error
         text1 = "User: " + username + " / " + " Password: " + password + " / " + " Email: " + emailUser
         if (err) {
             return console.log('Unable to scan directory: ' + err);
             
         }
-        /*
-        if(files.length == 0){
-            //if not, create file txt that saves info the go to /login **********
-            //needs directory of upload folder
-            //text1 = "User: " + username + " / " + " Password: " + password + " / " + " Email: " + emailUser
-            //console.log("4")
-            fs.writeFile(__dirname + "/users/user" + userNumbers + ".txt", text1 , function(err) {
-                if(err) {
-                    return console.log(err);
-                }
-                console.log("Entrou vazio");
-                userNumbers++
-                res.download(__dirname + "/users/user")
-                res.redirect('/')
-            });
-            //console.log("5")
-        }*/
         else{
             //var fileControl = 0;
             //listing all files using forEach
-            console.log("Entrou com");
+            //console.log("Entrou com");
             files.forEach(function (file) {
                 //console.log("2")
                 fs.readFile(path.join(directoryPath + file), function (err, data) {
@@ -168,33 +157,50 @@ app.post('/createUser', (req, res) =>{
     res.redirect('/')
 })
 
+//Verifies if a specific file contains a certain string
+function verifyInput(directoryPathAndFile, input){
+    fs.readFile(directoryPathAndFile, (err, data) => {
+        if (err) throw err;
+        if(data.includes(input)){
+            return true
+        }
+    })
+}
+
 app.post('/login', function (req, res) {
-    /*username = req.body.name
-    password = req.body.password*/
+    //username = req.body.name
+    //password = req.body.password
+    console.log(req.body.name)
+    console.log(req.body.password)
+    var vari = 0
+    usernameInput = req.body.name
+    passwordInput = req.body.password
 
-    if(username !="" &&password == "123" || auth == true){
-        console.log("")
-        console.log("*** User Connected ***")
-        console.log("Username: "+ username)
+    var directoryPath = path.join(__dirname, '/users/');
 
-        /*
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              //console.log('Email sent: ' + info.response);
-              console.log("Email sent!")
+    fs.readdir(directoryPath, function (err, files) {
+        files.forEach(function (file) {
+            //console.log(vari + files[0])
+            actualFile = files[vari]
+            var text = fs.readFileSync(__dirname + "/users/" + actualFile, 'utf-8');
+            var textByLine = text.split('\n')
+            //console.log("file in avaluiation: " + actualFile)
+            if (err) {
+                return console.log('Unable to scan directory: ' + err);     
             }
-          });*/
-        //console.log("Email sent!")
-        auth = true;
+            else{ //Scan all .txt files in users to verify if user has an account created
+                //console.log(String(textByLine))
+                //console.log(String(usernameInput))
+                //console.log(String(textByLine).indexOf(String(usernameInput)))
+                if(String(textByLine).indexOf(String(usernameInput)) != -1 && String(textByLine).indexOf(String(passwordInput)) != -1){
+                    auth = true;       
+                    return
+                }
+            }
+            vari ++
+        })
         res.redirect('/connect')
-        
-    }else{
-        //console.log("Login incorrect Please try again!")
-        //console.log("");
-        res.redirect('/')
-    }
+    })
 });
 
 app.get('/connect', (req, res)=>{
@@ -205,6 +211,9 @@ app.get('/connect', (req, res)=>{
         //console.log("fileName: " + req.body.filename)
         //console.log("Name: " + req.body.name)
         userIp = req.connection.remoteAddress
+        console.log("*** User Connected ***")
+        console.log("Username: " + usernameInput)
+        console.log("User email: " + emailUser)
         console.log("IP: " + req.connection.remoteAddress)
         console.log("Device: "+req.device.type.toUpperCase())
         console.log("");
@@ -219,7 +228,7 @@ app.get('/mainmenu', (req, res) => {
     }
     else{
         //res.sendFile(__dirname + '/view/main.html')
-        res.render(__dirname + '/view/main.html', {username:username,Hostip:Hostip,userIp:userIp})
+        res.render(__dirname + '/view/main.html', {usernameInput:usernameInput,Hostip:Hostip,userIp:userIp,emailUser:emailUser})
     }
 
     //console.log("IP conected: " + req.connection.remoteAddress)

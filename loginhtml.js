@@ -1,13 +1,11 @@
 function verifyLogin(){
-    //alert("teste executado " + document.getElementById('name').value);
+    /*//alert("teste executado " + document.getElementById('name').value);
     //var username = "" + document.getElementById('name').value
     var password = "" + document.getElementById('password').value
     if(password ==''){
         alert("Please complete the login!");
     }
-    else if(password != '123' ){
-        alert("Login incorrect Please try again!");
-    }
+  }*/
 }
 
 /*

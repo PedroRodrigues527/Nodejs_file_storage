@@ -12,6 +12,7 @@
           <p id="hostip">Server IP: </p>
           <p id="userip">User IP: </p>
           <p id="info">User: </p>
+          <p id="userEmail">Email: </p>
         </div>
 
       </section>
@@ -38,11 +39,13 @@
       //import userinput from '/loginhtml.js'
 
       //Get user name and put on p tag 
-      var usernameInput = " <%= username %> "
-      document.getElementById("info").textContent += usernameInput;
+      var usernameInputHTML = " <%= usernameInput %> "
+      document.getElementById("info").textContent += usernameInputHTML;
       var ip = " <%= Hostip %> "
       document.getElementById("hostip").textContent += ip;
       var userip = " <%= userIp %> "
       document.getElementById("userip").textContent += userip;
+      var userEmail = " <%= emailUser %> "
+      document.getElementById("userEmail").textContent += userEmail;
     </script>
 </html>

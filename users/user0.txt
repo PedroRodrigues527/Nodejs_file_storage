@@ -1,1 +1,1 @@
-User: abacate1 /  Password: 1111 /  Email: pedro.miguel.rodrigues00@gmail.com
+User: admin /  Password: 123 /  Email: adminemail@gmail.com
