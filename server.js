@@ -12,7 +12,7 @@ const app = express();
 var device = require('express-device')
 var i = 0
 var userNumbers = 0
-var port = 8000
+var port = 80
 //npm install nodemailer -> to send emails
 var nodemailer = require("nodemailer")
 
