@@ -27,17 +27,12 @@ var emailUser = "" //Variable to store the email (WITH VERIFICATION)
 var usernameInput = "" //Variable to store the username
 var passwordInput = "" //Variable to store the password
 var text1 = "" //Variable that saves the text that will be saved on .txt files
-
 var Hostip = ip.address() //Server IP address
 var userIp; //User IP
-
 var uploadSize = 0; //Size of file uploaded
 var fileText = ""; //NOT USING??
 var fileArray = []; //Stores all file names on upload folder
-
 global.checkCode  = crypto.randomBytes(20).toString('hex'); //Generate 20 caracter code
-
-
 //Emails Configuration(node mailer)
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -46,7 +41,6 @@ var transporter = nodemailer.createTransport({
         pass: 'yourpass'
     }
 });
-
 //Send Email with code to delete all files
 var mailOptionsCodeDelete = { 
     from: 'youremail@gmail.com',
@@ -54,7 +48,6 @@ var mailOptionsCodeDelete = {
     subject: 'VerifyCode',
     text: "Code: " + checkCode,
 };
-
 /*
 transporter.sendMail(mailOptions, (error,info)=>{
     if(error){
@@ -63,13 +56,12 @@ transporter.sendMail(mailOptions, (error,info)=>{
         console.log('Email sent' + info.response)
     }
 });*/
-
-
 global.auth = false; //True if login sucessufuly
-
 global.username = "";
-
 global.date_ob = new Date()
+
+
+//CODE **********
 
 app.use(device.capture())
 
@@ -172,11 +164,12 @@ app.post('/login', function (req, res) {
     console.log(req.body.name)
     console.log(req.body.password)
     var vari = 0
-    usernameInput = req.body.name
+    usernnameInput = req.body.name
     passwordInput = req.body.password
 
     var directoryPath = path.join(__dirname, '/users/');
 
+    
     fs.readdir(directoryPath, function (err, files) {
         files.forEach(function (file) {
             //console.log(vari + files[0])
