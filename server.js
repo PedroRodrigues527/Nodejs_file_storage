@@ -1,4 +1,4 @@
-/*npm express-fileupload*/
+//Modules (npm)  **********
 const { SSL_OP_EPHEMERAL_RSA } = require('constants');
 const express = require('express')
 const upload = require('express-fileupload')
@@ -8,37 +8,37 @@ var fs = require("fs"); //load filesystem module
 var path = require('path');
 var router = express.Router()
 const app = express();
-/*npm i --S express-device , npm install i --S express-device*/
-var device = require('express-device')
-var i = 0
-var userNumbers = 0
-var port = 80
-//npm install nodemailer -> to send emails
-var nodemailer = require("nodemailer")
-
-var username = ""
-var password = ""
-var emailUser = ""
-
-var usernameInput = ""
-var passwordInput = ""
-
-var text1 = ""
-
-//npm install ip
-var ip = require("ip");
-var Hostip = ip.address()
-var userIp;
-
-var uploadSize = 0;
-var fileText = "";
-var fileArray = [];
-
+var device = require('express-device')//npm i --S express-device , npm install i --S express-device
+var nodemailer = require("nodemailer") //npm install nodemailer -> to send emails
+var ip = require("ip");//npm install ip
 var crypto = require("crypto"); //to generate random letters
-global.checkCode  = crypto.randomBytes(20).toString('hex');
-
+const bodyParser = require('body-parser');
+const { strictEqual } = require('assert');
 //install npm install ejs
 
+
+//Variables and Constants **********
+var i = 0 //Variable that control the number of report + i files
+var userNumbers = 0 //Variable that control the number of users 
+var port = 80 //PORT 80 HTTP: visible with only the local IP on the browser
+var username = "" //Variable to store the username (WITH VERIFICATION)
+var password = ""  //Variable to store the password (WITH VERIFICATION)
+var emailUser = "" //Variable to store the email (WITH VERIFICATION)
+var usernameInput = "" //Variable to store the username
+var passwordInput = "" //Variable to store the password
+var text1 = "" //Variable that saves the text that will be saved on .txt files
+
+var Hostip = ip.address() //Server IP address
+var userIp; //User IP
+
+var uploadSize = 0; //Size of file uploaded
+var fileText = ""; //NOT USING??
+var fileArray = []; //Stores all file names on upload folder
+
+global.checkCode  = crypto.randomBytes(20).toString('hex'); //Generate 20 caracter code
+
+
+//Emails Configuration(node mailer)
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -65,7 +65,7 @@ transporter.sendMail(mailOptions, (error,info)=>{
 });*/
 
 
-global.auth = false;
+global.auth = false; //True if login sucessufuly
 
 global.username = "";
 
@@ -77,10 +77,8 @@ app.use(upload())
 
 app.use(express.static(__dirname + '/'));
 
-app.engine('html', require('ejs').renderFile);
+app.engine('html', require('ejs').renderFile); //Alows render a page with variables on this javascript file to html
 
-const bodyParser = require('body-parser');
-const { strictEqual } = require('assert');
 
 
 app.get('/', (req, res) => {
@@ -157,6 +155,7 @@ app.post('/createUser', (req, res) =>{
     res.redirect('/')
 })
 
+/*
 //Verifies if a specific file contains a certain string
 function verifyInput(directoryPathAndFile, input){
     fs.readFile(directoryPathAndFile, (err, data) => {
@@ -165,7 +164,7 @@ function verifyInput(directoryPathAndFile, input){
             return true
         }
     })
-}
+}*/
 
 app.post('/login', function (req, res) {
     //username = req.body.name
@@ -296,7 +295,6 @@ app.post('/deleteCheck', (req, res)=>{
     }
 })
 
-var uploadSize = 0
 
 //Deletes all files in 'uploads' folder
 //List all files in a path and delete every file in it
