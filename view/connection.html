@@ -10,31 +10,42 @@
                 <p id="description">To connect to the server and enables files transfer from devices please press the bottom 'connect'</p>
             </div>
         </section>
+        
+        <!-- Login Box -->
         <section class="mainmenuLogin">
             <form action="/login" method="post">
                 
+                <!-- User name field-->
                 <div id="userInput">
                     <label for="frame">Username:</label>
                     <input type="text" name="name" id="name"/>
                     <br>
                 </div>
+
+                <!--
                 <div id="passwordInput">
                     <label for="frame">Password:</label>
                     <input type="password" name="password" id="password"/>
                     <br>
                 </div>
+                 -->
+
+                 <!-- Login Button -->
                 <div id="loginButton">
-                    <button type="submit" class="btn btn-primary submit" onclick="verifyLogin() ; getUsername()">Login</button>
+                    <button type="submit" class="btn btn-primary submit">Enter!</button>
                 </div> 
             </form>
 
+            <!-- Register Options -->
+            <!--
             <div class="options">
                 <i class="options-options"></i>
                 <ul>
                   <li> <a href="createUser">Register</a></li>
                 </ul>
             </div>
-            
+             -->
+
         </section>
     </body>
     <script src="/loginhtml.js"></script>
