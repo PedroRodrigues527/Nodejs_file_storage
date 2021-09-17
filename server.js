@@ -24,8 +24,6 @@ var port = 80 //PORT 80 HTTP: visible with only the local IP on the browser
 var username = "" //Variable to store the username (WITH VERIFICATION)
 var password = ""  //Variable to store the password (WITH VERIFICATION)
 var emailUser = "" //Variable to store the email (WITH VERIFICATION)
-var usernameInput = "" //Variable to store the username
-var passwordInput = "" //Variable to store the password
 var text1 = "" //Variable that saves the text that will be saved on .txt files
 var Hostip = ip.address() //Server IP address
 var userIp; //User IP
@@ -33,18 +31,19 @@ var uploadSize = 0; //Size of file uploaded
 var fileText = ""; //NOT USING??
 var fileArray = []; //Stores all file names on upload folder
 global.checkCode  = crypto.randomBytes(20).toString('hex'); //Generate 20 caracter code
-//Emails Configuration(node mailer)
+
+//Email Configuration(node mailer)
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'youremail@gmail.com',
-        pass: 'yourpass'
+        user: 'lantransferwebsite@gmail.com',
+        pass: 'webserver123'
     }
 });
 //Send Email with code to delete all files
 var mailOptionsCodeDelete = { 
-    from: 'youremail@gmail.com',
-    to: 'xxx@gmail.com',
+    from: 'lantransferwebsite@gmail.com',
+    to: emailUser,
     subject: 'VerifyCode',
     text: "Code: " + checkCode,
 };
@@ -56,8 +55,10 @@ transporter.sendMail(mailOptions, (error,info)=>{
         console.log('Email sent' + info.response)
     }
 });*/
+
 global.auth = false; //True if login sucessufuly
 global.username = "";
+global.sendCode = "";
 global.date_ob = new Date()
 
 
@@ -87,6 +88,7 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/*
 app.get('/createUser', (req, res) =>{
     res.sendFile(__dirname + "/view/createUser.html")
 })
@@ -145,7 +147,7 @@ app.post('/createUser', (req, res) =>{
         }
     });
     res.redirect('/')
-})
+})*/
 
 /*
 //Verifies if a specific file contains a certain string
@@ -159,17 +161,14 @@ function verifyInput(directoryPathAndFile, input){
 }*/
 
 app.post('/login', function (req, res) {
-    //username = req.body.name
-    //password = req.body.password
-    console.log(req.body.name)
-    console.log(req.body.password)
-    var vari = 0
-    usernnameInput = req.body.name
-    passwordInput = req.body.password
+    username = req.body.name
+    auth = true;
+    res.redirect('/connect')
 
-    var directoryPath = path.join(__dirname, '/users/');
 
-    
+    //var directoryPath = path.join(__dirname, '/users/');
+    /*
+    //Verify Login
     fs.readdir(directoryPath, function (err, files) {
         files.forEach(function (file) {
             //console.log(vari + files[0])
@@ -192,7 +191,7 @@ app.post('/login', function (req, res) {
             vari ++
         })
         res.redirect('/connect')
-    })
+    })*/
 });
 
 app.get('/connect', (req, res)=>{
@@ -204,8 +203,7 @@ app.get('/connect', (req, res)=>{
         //console.log("Name: " + req.body.name)
         userIp = req.connection.remoteAddress
         console.log("*** User Connected ***")
-        console.log("Username: " + usernameInput)
-        console.log("User email: " + emailUser)
+        console.log("Username: " + username)
         console.log("IP: " + req.connection.remoteAddress)
         console.log("Device: "+req.device.type.toUpperCase())
         console.log("");
@@ -213,18 +211,14 @@ app.get('/connect', (req, res)=>{
     }
 })
 
-//https://www.geeksforgeeks.org/how-to-pass-access-node-js-variable-to-an-html-file-template/
 app.get('/mainmenu', (req, res) => {
     if(auth==false){
         res.redirect('/')
     }
     else{
         //res.sendFile(__dirname + '/view/main.html')
-        res.render(__dirname + '/view/main.html', {usernameInput:usernameInput,Hostip:Hostip,userIp:userIp,emailUser:emailUser})
+        res.render(__dirname + '/view/main.html', {username:username,Hostip:Hostip,userIp:userIp})
     }
-
-    //console.log("IP conected: " + req.connection.remoteAddress)
-    //console.log("Device: "+req.device.type.toUpperCase())
 })
 
 //Logout from the website
@@ -249,27 +243,46 @@ app.get('/download', (req, res) => {
         res.redirect('/')
     }
     else{
-    //console.log("entering download");
-    res.sendFile(__dirname + '/view/download.html')
-    //res.send(namefile.typefile)
+        res.sendFile(__dirname + '/view/download.html')
     }
 
 })
 
+/*
 //Verify user by sending email (previously inserted - above) with 20 caracters code. If correct inserted then it deletes all files
 app.get('/deleteCheck', (req, res) =>{
+    if(auth == true){
+        res.sendFile(__dirname + '/view/sendCode.html')
+    }else{
+        res.redirect('/')
+    }
+})
+
+//Sends code the email
+app.post('/sendCode', (req, res)=>{
+    if(auth==false){
+        res.redirect('/')
+    }
+    emailUser = req.body.sendCode
+    console.log("emailUser " + emailUser)
+    transporter.sendMail(mailOptionsCodeDelete, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          //console.log('Email sent: ' + info.response);
+          console.log("*** CODE REQUEST ***")
+          console.log("CODE REQUESTED BY: "+ username )
+          console.log("Purpose: DELETE ALL FILES ")
+        }
+    });
+    res.redirect('/deleteCheckPage')
+})*/
+
+//Delete all files option
+app.get('/deleteCheck', (req, res) =>{
     if(auth){
-        transporter.sendMail(mailOptionsCodeDelete, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              //console.log('Email sent: ' + info.response);
-              console.log("*** CODE REQUEST ***")
-              console.log("CODE REQUESTED BY: "+ username )
-              console.log("Purpose: DELETE ALL FILES ")
-            }
-          });
-        res.sendFile(__dirname + '/view/verifyCode.html')
+        //console.log("aaaaa1")
+        res.sendFile(__dirname + '/view/caution.html')
     }else{
         res.redirect('/')
     }
@@ -277,6 +290,11 @@ app.get('/deleteCheck', (req, res) =>{
 
 //Verify with code sent by email is the same inserted by the user
 app.post('/deleteCheck', (req, res)=>{
+    if(auth==false){
+        res.redirect('/')
+    }
+    res.redirect('/deleteall');
+    /*
     //checkCode = crypto.randomBytes(20).toString('hex');// random code generated by email
     console.log("Check code: " + checkCode)
     if(req.body.verifyCode == checkCode){
@@ -285,13 +303,17 @@ app.post('/deleteCheck', (req, res)=>{
     }else{
         //console.log("post2: " + req.body.verifyCode)
         res.redirect('/')
-    }
+    }*/
 })
 
 
 //Deletes all files in 'uploads' folder
 //List all files in a path and delete every file in it
 app.get('/deleteall', (req, res) =>{
+    if(auth==false){
+        res.redirect('/')
+    }
+    
     var fileSeq = 0;
     //number of files in the upload folder
     fs.readdir(__dirname + '/uploads', function(err, files){
@@ -317,9 +339,9 @@ app.get('/deleteall', (req, res) =>{
                 
             }
         })
+        //res.redirect('/deletedallfiles');
     })
     //console.log("ALL " + fileSeq + " FILES DELETED")
-
     res.redirect('/deletedallfiles');
 })
 
@@ -329,14 +351,14 @@ app.get('/deletedallfiles', (req, res)=>{
     res.redirect('/mainmenu');
 })
 
-//Write a .txt file with all files in the 'uploads' folder
+//Write a .txt file with all files in the 'reports' folder
 app.get('/files', (req, res)=>{
     if(auth==false){
         res.redirect('/')
     }
     else{
         var i = 0;
-        const directoryPath = path.join(__dirname, '/uploads/');
+        var directoryPath = path.join(__dirname, '/reports/');
         //var fileText = "";
 
         fs.readdir(directoryPath, function (err, files) {
@@ -388,7 +410,11 @@ app.get('/files', (req, res)=>{
     }
 })
 
+//Page with all the files on 'uploads'
 app.get('/contentHtml', (req, res)=>{
+    if(auth==false){
+        res.redirect('/')
+    }
     res.render(__dirname + '/view/content.html', {fileText:fileText, uploadSize:uploadSize, fileArray:fileArray})
 })
 
@@ -416,6 +442,7 @@ app.post('/downloads', (req, res)=>{
     }
 })
 
+//Delete a file - option
 app.get('/delete', (req, res)=>{
     if(auth==false){
         res.redirect('/')
@@ -541,12 +568,6 @@ app.listen(port, function(){
     console.log("Listening on Port " + port);
     //npm install ip
     //var Hostip = require("ip");
-    console.log("Server Local IP: " + ip.address());  
+    console.log("Server Local IP: " + ip.address());
+    console.log("")  
 });
-
-
-/* https://www.youtube.com/watch?v=jlDfT57QzP4 html download */
-
-
-/*https://www.youtube.com/watch?v=ymO_r1hcIXk 4:21 */
-/*https://www.snel.com/support/initial-server-setup-ubuntu-16-04/ */
