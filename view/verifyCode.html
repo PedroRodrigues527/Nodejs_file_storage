@@ -9,14 +9,16 @@
             <p>To Proof Identity please check the email and fill the code</p>
         </div>
 
+        <!-- Check code sended to email -->
         <section class="downloadForm">
             <div  id="codeBox">
-                <form method="post" action="/deleteCheck" enctype="multipart/form-data">
+                <form method="post" action="/deleteCheckPage" enctype="multipart/form-data">
                     <label>Code: </label><br>
                     <input type="text" name="verifyCode" id="verifyCode"/>
                     <br>
                     <br>
                     <button type="submit" class="btn btn-primary submit">Check Code</button>
+                    <br>
                 </form>
             </div>
         </section>
