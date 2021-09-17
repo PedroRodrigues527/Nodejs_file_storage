@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>Verify Identity</h1>
+            <p>To Proof Identity please check the email and fill the code</p>
+        </div>
+
+        <!-- Send code to email -->
+        <section class="downloadForm">
+            <div  id="codeBox">
+                <form method="post" action="/sendCode" enctype="multipart/form-data">
+                    <label>Email: </label><br>
+                    <input type="text" name="sendCode" id="sendCode"/>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary submit">Send Code</button>
+                    <br>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>
