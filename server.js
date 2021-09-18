@@ -232,6 +232,7 @@ app.get('/disconnect', (req, res)=>{
         console.log("Username: " + username)
         console.log("IP disconected: " + req.connection.remoteAddress)
         console.log("Device: "+req.device.type.toUpperCase())
+        auth = false;
         res.redirect('/');
     }
 
