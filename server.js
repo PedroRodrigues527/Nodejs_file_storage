@@ -228,10 +228,12 @@ app.get('/disconnect', (req, res)=>{
     }
     else{
         auth = false
+        console.log("")
         console.log("*** User Disconnected *** ")
         console.log("Username: " + username)
         console.log("IP disconected: " + req.connection.remoteAddress)
         console.log("Device: "+req.device.type.toUpperCase())
+        console.log("")
         auth = false;
         res.redirect('/');
     }
@@ -349,6 +351,7 @@ app.get('/deleteall', (req, res) =>{
 //when deleted all files
 app.get('/deletedallfiles', (req, res)=>{
     console.log("ALL " + uploadSize + " FILES DELETED")
+    console.log("")
     res.redirect('/mainmenu');
 })
 
