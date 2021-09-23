@@ -5,9 +5,26 @@
 
 .header{
     padding: 2% 6%;
-    text-align: center;
-    background-color: rgba(131, 245, 245, 0.659);
+    margin: 0;
+    background-color: rgba(165, 165, 165, 0.699);
+    text-align: justify;
 }
+
+.header-title{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+
+#title{
+    float: left;
+}
+
+#info{
+    float: right;
+}
+
 
 .userInfo{
     border-style: double;
@@ -16,15 +33,17 @@
     width: 30%;
     margin: auto;
     margin-top: 10px;
+    text-align: center;
 }
-
-#title{
+/*
+.title{
+    text-align: justify;
     padding-top: 0.4px;
-}
-
+}*/
+/*
 #info{
     font-size: 15px;
-}
+}*/
 
 #userip{
     font-size: 15px;
@@ -46,8 +65,10 @@
 
 
 .options{
+    padding-top: 50px;
     flex: 1;
     text-align: center;
+    font-size: 2px;
 }
 
 /* Options aligned */
@@ -68,7 +89,7 @@
     content: '';
     width: 0%;
     height: 2px;
-    background: rgb(21, 130, 232);
+    background: rgb(0, 0, 0);
     display: block;
     margin: auto;
     transition: 0.2s;
@@ -103,7 +124,7 @@
     width: 25%;
     margin: auto;
     margin-top: 10px;
-    background-color:rgba(94, 252, 252, 0.616);
+    background-color:rgba(0, 0, 0, 0.616);
 }
 
 /*
@@ -124,7 +145,8 @@
 }
 
 body{
-    background: rgb(178, 230, 232);
+    margin: 0;
+    background: rgb(204, 204, 204);
 }
 
 .connectionSec{
