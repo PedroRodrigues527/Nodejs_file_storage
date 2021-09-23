@@ -3,17 +3,51 @@
         <link rel="stylesheet" type="text/css" href="style.css"/>
     </head>
     <body>
-        <h1>Delete File</h1>
-        <form method="post" action="/deletefile" enctype="multipart/form-data">
-            <label>Name of the file:</label><br>
-            <input type="text" name="namefile" id="namefile"/>
-            <br>
-            <label>Type of the file: </label><br>   
-            <input type="text" name="typefile" id="typefile"/>
-            <br>
-            <br>
-            <button type="submit" class="btn btn-primary submit">Delete File</button>
-        </form>
+        <section class="header">
+
+            <div class="header-title">
+              <p id="title">Delete File</p>
+              <p id="info">User: </p>
+            </div>
+    
+            <section class="options">
+                <ul>
+                  <form method="GET" action="/files" enctype="multipart/form-data">
+                    <li> <a href="files">Show files on server</a></li>
+                    <li> <a href="upload">Upload</a></li>
+                    <li> <a href="download">Download</a></li>
+                    <li> <a href="delete">Delete File</a></li>
+                    <li> <a href="disconnect">Disconnect</a></li>
+                    <li> <a href="deleteCheck">Delete All Files</a></li>
+                  </form>
+                </ul>
+            </section>
+        </section>
+
+        
+        <section class="uploadForm">
+            <form method="post" action="/deletefile" enctype="multipart/form-data">
+                <div id="nameFileDownload">
+                    <label>Name of the file:</label><br>
+                    <input type="text" name="namefile" id="namefile"/>
+                </div>
+                <br>
+                <div id="typeFileDownload">
+                    <label>Type of the file: </label><br>   
+                    <input type="text" name="typefile" id="typefile"/>
+                </div>
+
+                <br>
+                <br>
+
+                <div id="downloadButton">
+                    <button type="submit" class="btn btn-primary submit">Delete File</button>
+                </div>
+        
+            </form>
+        </section>
+
+        
         
         <div class="options">
             <ul>
