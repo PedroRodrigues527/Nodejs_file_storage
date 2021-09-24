@@ -59,6 +59,10 @@
         -->
     </body>
     <script>
+        //Get user name and put on p tag 
+        var usernameInputHTML = " <%= username %> "
+        document.getElementById("info").textContent += usernameInputHTML;
+
         //requiring path and fs modules
         const path = require('path');
         const fs = require('fs');

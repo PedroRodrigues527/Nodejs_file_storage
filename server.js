@@ -246,7 +246,8 @@ app.get('/download', (req, res) => {
         res.redirect('/')
     }
     else{
-        res.sendFile(__dirname + '/view/download.html')
+        res.render(__dirname + '/view/download.html', {username:username})
+        //res.sendFile(__dirname + '/view/download.html')
     }
 
 })
@@ -285,7 +286,8 @@ app.post('/sendCode', (req, res)=>{
 app.get('/deleteCheck', (req, res) =>{
     if(auth){
         //console.log("aaaaa1")
-        res.sendFile(__dirname + '/view/caution.html')
+        //res.sendFile(__dirname + '/view/caution.html')
+        res.render(__dirname + '/view/caution.html', {username:username})
     }else{
         res.redirect('/')
     }
@@ -419,7 +421,7 @@ app.get('/contentHtml', (req, res)=>{
     if(auth==false){
         res.redirect('/')
     }
-    res.render(__dirname + '/view/content.html', {fileText:fileText, uploadSize:uploadSize, fileArray:fileArray})
+    res.render(__dirname + '/view/content.html', {fileText:fileText, uploadSize:uploadSize, fileArray:fileArray, username:username})
 })
 
 //To download file
@@ -452,7 +454,8 @@ app.get('/delete', (req, res)=>{
         res.redirect('/')
     }
     else{
-        res.sendFile(__dirname + '/view/delete.html')
+        res.render(__dirname + '/view/delete.html', {username:username})
+        //res.sendFile(__dirname + '/view/delete.html')
     }    
 })
 
@@ -488,7 +491,8 @@ app.get('/upload', (req, res) => {
         res.redirect('/')
     }
     else{
-        res.sendFile(__dirname + '/view/upload.html')
+        res.render(__dirname + '/view/upload.html', {username:username})
+        //res.sendFile(__dirname + '/view/upload.html')
     }
     //console.log("entering upload");
 })

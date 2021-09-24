@@ -62,6 +62,10 @@
 
         document.getElementById("content").textContent += array;
 
+        //Get user name and put on p tag 
+        var usernameInputHTML = " <%= username %> "
+        document.getElementById("info").textContent += usernameInputHTML;
+
         /*
         for(i = 0; i <= filesize-1 ; i++){
             var a = document.createElement('a');
