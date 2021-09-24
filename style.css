@@ -4,6 +4,54 @@
 }*/
 
 .header{
+	position: relative;
+    background-color: rgb(130, 130, 130);
+}
+
+nav{
+    display: flex; /*Enables the options being in the same line */
+    padding: 2% 6%;
+    justify-content: space-between; /* OPtions are in the conner */
+    align-items: center; /*Text and options are aligned*/
+}
+
+.nav-links{
+    flex: 1;
+    text-align: right; 
+}
+
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    padding-right: 25px;
+    position: relative;
+}
+
+/* Definition of the line below the options */
+.nav-links ul li::after{
+	content: '';
+	width: 	0%; /* 0% because we wanto to display the line when the cursor is on top of a option! */
+	height: 2px;
+	background: #000000;
+	display: block;
+	margin: auto;
+	transition: 0.3s;
+}
+
+.nav-links ul li a{
+    color: black;
+    text-decoration: none;
+    
+}
+
+/* ativation of the line when the cursor is on, an certain option */
+.nav-links ul li:hover::after{
+	width: 100%;	
+}
+
+/*
+.header{
     padding: 2% 6%;
     margin: 0;
     background-color: rgba(165, 165, 165, 0.699);
@@ -19,7 +67,7 @@
 
 #title{
     float: left;
-}
+}*/
 
 #info{
     float: right;
@@ -63,15 +111,15 @@
     text-align: center;
 }
 
-
+/*
 .options{
     padding-top: 50px;
     flex: 1;
     text-align: center;
     font-size: 2px;
-}
+}*/
 
-/* Options aligned */
+/* Options aligned *//*
 .options ul li{
     list-style: none;
     display: inline-block;
@@ -97,8 +145,7 @@
 
 .options ul li:hover::after{
     width: 100%;
-}
-
+}*/
 
 #connectH1{
     text-align: center;

@@ -7,33 +7,31 @@
     <body>
 
       <section class="header">
-
-        <div class="header-title">
-          <p id="title">Main Menu</p>
+        <nav>
+          <p>Main Menu</p>
+          <div class="nav-links" id="navLinks">
+            <ul>
+              <form method="GET" action="/files" enctype="multipart/form-data">
+                <li> <a href="files">Show files on server</a></li>
+                <li> <a href="upload">Upload</a></li>
+                <li> <a href="download">Download</a></li>
+                <li> <a href="delete">Delete File</a></li>
+                <li> <a href="disconnect">Disconnect</a></li>
+                <li> <a href="deleteCheck">Delete All Files</a></li>
+              </form>
+            </ul>
+          </div>
           <p id="info">User: </p>
-        </div>
-
-        <section class="options">
-          <ul>
-            <form method="GET" action="/files" enctype="multipart/form-data">
-              <li> <a href="files">Show files on server</a></li>
-              <li> <a href="upload">Upload</a></li>
-              <li> <a href="download">Download</a></li>
-              <li> <a href="delete">Delete File</a></li>
-              <li> <a href="disconnect">Disconnect</a></li>
-              <li> <a href="deleteCheck">Delete All Files</a></li>
-            </form>
-          </ul>
-        </section>
+        </nav>
       </section>
 
-        <!--
+        
         <div class="userInfo">
           <p id="hostip">Server IP: </p>
           <p id="userip">User IP: </p>
-          <p id="info">User: </p>
+          
         </div>
-        -->
+        
 
       <!--
       <section class="options">
@@ -49,11 +47,6 @@
         </ul>
       </section>
       -->
-      <div class="userInfo">
-        <p id="hostip">Server IP: </p>
-        <p id="userip">User IP: </p>
-      </div>
-      
     <script type="text/javascript" src="/loginhtml.js"></script>
     <script>
       //const {userinput} = require('/loginhtml.js');
