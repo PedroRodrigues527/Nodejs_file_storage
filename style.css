@@ -17,7 +17,14 @@ nav{
 
 .nav-links{
     flex: 1;
-    text-align: right; 
+    text-align: center;
+    border-radius: 25px;
+    border: 2px solid #000000;
+    margin-left: 80px;
+    margin-right: 50px;
+    /*padding: 20px; 
+    width: 200px;
+    height: 150px;*/
 }
 
 .nav-links ul li{
