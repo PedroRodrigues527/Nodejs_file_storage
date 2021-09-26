@@ -31,6 +31,9 @@ var uploadSize = 0; //Size of file uploaded
 var fileText = ""; //NOT USING??
 var fileArray = []; //Stores all file names on upload folder
 global.checkCode  = crypto.randomBytes(20).toString('hex'); //Generate 20 caracter code
+var file = "";
+var filename = "";
+var fileSize = 0; //Bytes
 
 //Email Configuration(node mailer)
 var transporter = nodemailer.createTransport({
