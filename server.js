@@ -500,68 +500,39 @@ app.get('/upload', (req, res) => {
 /* https://stackoverflow.com/questions/40509666/sending-whole-folder-content-to-client-with-express */
 
 /* Upload file*/
-app.post('/', (req, res) =>{
+app.post('/uploadFile', (req, res) =>{
     if(auth==true){
         if(req.files){
-
-
-            var file = req.files.file;
-            var filename = file.name;
+            //file = req.files.file;
+            //filename = file.name;
             
-            var fileSize = file.size; //Bytes
+            //fileSize = file.size; //Bytes
+            /*console.log(req.files.file)
+            console.log(req.files.file.name)
+            console.log(req.files.file.size)
+            console.log("--------------------")*/
     
-            /*//Input file size
-            var stats = fs.statSync(__dirname + filename)
-            var fileSizeBytes = stats.size; //Bytes
-            var fileSize = fileSizeBytes / (1024*1024);*/
-    
-            //console.log("Name: " + filename);
-            //console.log("Size: " + fileSize + " Bytes")
-            var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress + " ,User: " + username
-    
-            file.mv('./uploads/' + filename, function (err){ //192.168.0.X./uploads?
-                console.log("")
-                console.log("*** File uploaded ***")
-                console.log("User: " + username)
-                console.log("Filename: " + filename);
-                console.log("Size: " + fileSize + " Bytes")
+            req.files.file.mv(__dirname + '/uploads/' + req.files.file.name, function (err){ //192.168.0.X./uploads?
                 //console.log("File:" + file); //[object Object]
                 if(err){
                     res.send(err)
                 }         
-                else{
-                    //res.send("file uploaded with sucess")
-                    console.log("File Uploaded successfuly!");
-                    //console.log("******")
-                    console.log("")
-                    /*
-                    //Send a report file to user
-                    //var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
-                    res.attachment('Upload Report ' + i + '.txt')
-                    res.type('txt')
-                    res.send(text1)*/
-    
-    
-                    //needs directory of upload folder
-                    fs.writeFile("./reports/report"+i+".txt", text1 , function(err) {
-                        if(err) {
-                            return console.log(err);
-                        }
-                        //console.log("The file was saved!");
-                        res.download(__dirname + "/reports/report"+i+".txt")
-                    });
-                    //i++;
-
-                    //res.sendFile(__dirname + 'alertJSUpload');
-                    //res.render("", {message: "File Uploaded successfuly"})
-                }
-                //res.download(__dirname + "/reports/report"+i+".txt")
-                i++;
+                
+                //res.send("file uploaded with sucess")
+                console.log("")
+                console.log("*** File uploaded ***")
+                console.log("User: " + username)
+                console.log("Filename: " + req.files.file.name);
+                console.log("Size: " + req.files.file.size + " Bytes")
+                //console.log("File:" + file); //[object Object]
+                console.log("File Uploaded successfuly!");
+                //console.log("******")
+                console.log("") 
             });
-            //return to main menu
-            //console.log("*********")
-            res.render(__dirname + '/view/main.html', {username:username,Hostip:Hostip,userIp:userIp})
-        }else{
+            //res.render(__dirname + '/view/main.html', {username:username,Hostip:Hostip,userIp:userIp})
+        }
+        else{
+            console.log("Nao tem ficheiro")
             res.redirect('/mainmenu')
         }
     }
