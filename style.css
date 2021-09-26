@@ -54,24 +54,6 @@ nav{
 	width: 100%;	
 }
 
-/*
-.header{
-    padding: 2% 6%;
-    margin: 0;
-    background-color: rgba(165, 165, 165, 0.699);
-    text-align: justify;
-}
-
-.header-title{
-    text-align: center;
-    vertical-align: middle;
-    font-size: 20px;
-}
-
-
-#title{
-    float: left;
-}*/
 
 #info{
     float: right;
@@ -87,6 +69,7 @@ nav{
     margin-top: 10px;
     text-align: center;
 }
+
 /*
 .title{
     text-align: justify;
@@ -115,73 +98,36 @@ nav{
     text-align: center;
 }
 
-/*
-.options{
-    padding-top: 50px;
-    flex: 1;
-    text-align: center;
-    font-size: 2px;
-}*/
-
-/* Options aligned *//*
-.options ul li{
-    list-style: none;
-    display: inline-block;
-    padding: 8px 12px;
-    position: relative;
-}
-
-.options ul li a{
-    color: black;
-    text-decoration: none;
-    font-size: 20px;
-}
-
-.options ul li::after{
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: rgb(0, 0, 0);
-    display: block;
-    margin: auto;
-    transition: 0.2s;
-}
-
-.options ul li:hover::after{
-    width: 100%;
-}*/
 
 #connectH1{
+    padding-top: 10px;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 25px;
 }
 
 #description{
-    padding-top: 10px;
+    padding-top: 0px;
     padding-left: 10px;
+    padding-bottom: 5px;
+    text-align: center;
 }
 
 
 .mainmenuLogin{
+    border-radius: 25px;
+    border: 2px solid #000000;
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
     font-size: 20px;
-    border-style: double;
-    border-radius: 5px;
-    border-color: black;
     border-bottom-left-radius: 2%;
     width: 25%;
     margin: auto;
     margin-top: 10px;
-    background-color:rgba(0, 0, 0, 0.616);
+    background-color:rgba(109, 109, 109, 0.616);
 }
 
-/*
-#nameInput{
-    font-size: large;
-}*/
 
 #passwordInput{
     text-align: center;
