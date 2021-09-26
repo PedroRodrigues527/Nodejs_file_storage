@@ -367,7 +367,7 @@ app.get('/files', (req, res)=>{
     }
     else{
         var i = 0;
-        var directoryPath = path.join(__dirname, '/reports/');
+        var directoryPath = path.join(__dirname, '/uploads/');
         //var fileText = "";
 
         fs.readdir(directoryPath, function (err, files) {
