@@ -71,7 +71,7 @@ app.use(device.capture())
 
 app.use(upload())
 
-app.use(express.static(__dirname + '/'));
+app.use(express.static(__dirname + '/')); //Display .CSS file
 
 app.engine('html', require('ejs').renderFile); //Alows render a page with variables on this javascript file to html
 
