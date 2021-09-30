@@ -550,6 +550,7 @@ app.listen(port, function(){
     console.log("Listening on Port " + port);
     //npm install ip
     //var Hostip = require("ip");
+    console.log("To terminate the server press: CTRL + C")
     console.log("Server Local IP: " + ip.address());
     console.log("")  
 });
