@@ -5,12 +5,13 @@
 ### General overview of the program.
 The device that is hosting the server will be able to store and manage files(upload, download, delete and see the content) in the 'uploads' folder in the host machine. Those files in this folder can be accessed by other devices, if they are connected in the same network by using (in the browser) the ip visible in the terminal (Host Ip) (or localhost, if we wanted to access in the host device)
 
+![serverstart](https://user-images.githubusercontent.com/61146730/135846159-10ffc2e4-ac52-4d20-88a6-d36602c2330d.PNG)
+
 When activated the server on terminal, we will redirected to a web page that have a simple login form, with only the username(optional).
 
 ![1](https://user-images.githubusercontent.com/61146730/135845518-ade374e4-1441-44ae-bd54-4a9f3e28133b.PNG)
 
 When signin it (shows on the server terminal the name of the user, user lan ip and device name) we will be redirect to main page who has 6 options - show files on host machine, upload, download, delete file, disconnect and delete all files.
-![serverstart](https://user-images.githubusercontent.com/61146730/135846159-10ffc2e4-ac52-4d20-88a6-d36602c2330d.PNG)
 
 ![login](https://user-images.githubusercontent.com/61146730/135845566-da12e881-e5f0-4735-855b-a6f4658ce3c8.PNG)
 
