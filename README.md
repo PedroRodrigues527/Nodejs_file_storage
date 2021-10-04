@@ -22,7 +22,8 @@ When signin it (shows on the server terminal the name of the user, user lan ip a
 ***SHOW FILES ON SERVER***
 
 On screen will be visible the files that are stored on 'uploads' folder and their respectivly type.
-[showfilesserver](https://user-images.githubusercontent.com/61146730/135845324-1a5c7097-547d-47f0-bf39-e23144bdf5b8.PNG)
+
+![showfilesserver](https://user-images.githubusercontent.com/61146730/135845324-1a5c7097-547d-47f0-bf39-e23144bdf5b8.PNG)
 
 ***UPLOAD***
 
