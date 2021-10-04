@@ -67,7 +67,8 @@ This options logs out from atual page and redirects to login page who we need to
 
 
 ## 2)How to run !
-the server and what you need to properly run it.
+
+How to run the server and what you need to properly run it.
 
 To properly run the server the user need to download node.js (https://nodejs.org/en/). When installed search the start.bat file in folder directory to start the terminal.
 
