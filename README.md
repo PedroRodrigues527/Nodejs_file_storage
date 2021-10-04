@@ -1,5 +1,8 @@
 # LAN_Transfer_WebSite
 
+1)The program, and his functions.
+2)How to run!
+
 ## 1)The program, and his functions.
 
 ### General overview of the program.
