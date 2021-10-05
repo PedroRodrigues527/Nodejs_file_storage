@@ -11,7 +11,11 @@ The device that is hosting the server will be able to store and manage files(upl
 
 ![serverstart](https://user-images.githubusercontent.com/61146730/135846159-10ffc2e4-ac52-4d20-88a6-d36602c2330d.PNG)
 
-When activated the server on terminal, we will redirected to a web page that have a simple login form, with only the username(optional).
+When activated the server on terminal, to access the login page search on the browser the ip visible on terminal or localhost (if using the same device as sever host)
+
+![link](https://user-images.githubusercontent.com/61146730/136015300-2e5c3427-ffce-4c1a-857a-dbb1e98c2acd.PNG)
+
+Then you will redirected to a web page that have a simple login form, with only the username(optional).
 
 ![1](https://user-images.githubusercontent.com/61146730/135845518-ade374e4-1441-44ae-bd54-4a9f3e28133b.PNG)
 
