@@ -39,8 +39,8 @@ var fileSize = 0; //Bytes
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'lantransferwebsite@gmail.com',
-        pass: 'webserver123'
+        user: 'lantransferwebsite@xxx.com',
+        pass: 'xxx'
     }
 });
 //Send Email with code to delete all files
