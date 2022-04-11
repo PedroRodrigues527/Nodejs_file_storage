@@ -7,6 +7,7 @@ const upload = require('express-fileupload')
 var fs = require("fs"); //load filesystem module
 var path = require('path');
 var router = express.Router()
+var mysql = require('mysql')
 const app = express();
 var device = require('express-device')//npm i --S express-device , npm install i --S express-device
 var nodemailer = require("nodemailer") //npm install nodemailer -> to send emails
@@ -34,6 +35,18 @@ global.checkCode  = crypto.randomBytes(20).toString('hex'); //Generate 20 caract
 var file = "";
 var filename = "";
 var fileSize = 0; //Bytes
+
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "nodejs_db"
+})
+
+con.connect((err) =>{
+    if(err) throw err;
+    console.log("Data Base Connected!")
+})
 
 //Email Configuration(node mailer)
 var transporter = nodemailer.createTransport({
@@ -91,66 +104,32 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/*
+
 app.get('/createUser', (req, res) =>{
     res.sendFile(__dirname + "/view/createUser.html")
+})
+
+app.get('/teste', (req, res)=>{
+    con.query("SELECT * FROM user", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+    });
 })
 
 app.post('/createUser', (req, res) =>{
     username = req.body.nameUser
     password = req.body.passUser
     emailUser = req.body.emailUser
-
-    console.log("")
-    console.log("Registration")
-    console.log("Username: " + username)
-    console.log("Password: " + password)
-    console.log("Email user: " + emailUser)
-
-    var directoryPath = path.join(__dirname, '/users/');
-
-    //check if exist same name or email **********
-    fs.readdir(directoryPath, function (err, files) {
-        //console.log("1")
-        //handling error
-        text1 = "User: " + username + " / " + " Password: " + password + " / " + " Email: " + emailUser
-        if (err) {
-            return console.log('Unable to scan directory: ' + err);
-            
-        }
-        else{
-            //var fileControl = 0;
-            //listing all files using forEach
-            //console.log("Entrou com");
-            files.forEach(function (file) {
-                //console.log("2")
-                fs.readFile(path.join(directoryPath + file), function (err, data) {
-                    if (err) return console.log(err);
-                    
-                    if(data.includes(username) || data.includes(emailUser)){ //exist other account with the same username
-                        console.log(data)
-                        console.log("already exist same username or email")
-                        res.sendFile(__dirname + '/view/connection.html');
-                    }
-                    else{
-                        console.log("Entrou direito");
-                        //text1 = "User: " + username + " / " + " Password: " + password + " / " + " Email: " + emailUser
-                        //console.log("4")
-                        fs.writeFile(directoryPath + "/user" + userNumbers + '.txt', text1 , function(err) {
-                            if(err) {
-                                return console.log(err);
-                            }
-                            //console.log("The file was saved!");
-                            userNumbers++
-                            //res.download(__dirname + "/users/user")
-                        });
-                    }
-                });
-            });
-        }
+    
+    //Check Data Base user already register
+    con.query("SELECT * FROM user", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
     });
-    res.redirect('/')
-})*/
+    
+    //If not create regist in Data Base
+
+})
 
 /*
 //Verifies if a specific file contains a certain string
