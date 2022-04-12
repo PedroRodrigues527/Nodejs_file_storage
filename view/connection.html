@@ -12,6 +12,7 @@
         </section>
         
         <!-- Login Box -->
+        <p id="log_suc" style="color: green;text-align: center; size: 0px;"></p>
         <p id="error" style="color: red;text-align: center; size: 0px;"> </p>
         <section class="mainmenuLogin">
             <form action="/login" method="post">
@@ -50,6 +51,11 @@
         </section>
     </body>
     <script>    
+        var reg = " <%= reg_complete %> "
+        if(failed.match("Registration completed!")){
+            document.getElementById("log_suc").textContent += "Registration completed!";
+        }
+
 
         var failed = " <%= login_failed %> "
         var i = 0

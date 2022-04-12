@@ -126,7 +126,9 @@ app.post('/createUser', (req, res) =>{
             con.query(new_account_query, function (err, result, fields) {
                 if (err) throw err;
                 console.log("Registration completed!")
-                res.redirect('/')
+                //res.redirect('/')
+                let reg_complete = "Registration completed!"
+                res.render(__dirname + '/view/connection.html', {reg_complete:reg_complete})
             })
         }
         else if((result[0] != null ||  result[0] != "" || result[0] != undefined ) || (result[1] != undefined||result[1] != null || result[1] != "")){
