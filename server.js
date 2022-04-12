@@ -63,14 +63,6 @@ var mailOptionsCodeDelete = {
     subject: 'VerifyCode',
     text: "Code: " + checkCode
 };
-/*
-transporter.sendMail(mailOptions, (error,info)=>{
-    if(error){
-        console.log(error)
-    }else{
-        console.log('Email sent' + info.response)
-    }
-});*/
 
 global.auth = false; //True if login sucessufuly
 global.username = "";
@@ -91,15 +83,7 @@ app.engine('html', require('ejs').renderFile); //Alows render a page with variab
 
 
 app.get('/', (req, res) => {
-   // console.log("IP conected: " + req.connection.remoteAddress)
-   // console.log("Device: "+req.device.type.toUpperCase())
-   /* app.post('/', function (req, res) {
-        var name = req.body
-        console.log("user name: "+ name)
-    });*/
-    //res.sendFile(__dirname + '/view/createUser.html');
     res.sendFile(__dirname + '/view/connection.html');
-    //console.log("teste1")
 })
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -109,71 +93,63 @@ app.get('/createUser', (req, res) =>{
     res.sendFile(__dirname + "/view/createUser.html")
 })
 
+//Route para teste
+/*
 app.get('/teste', (req, res)=>{
-    con.query("SELECT * FROM user", function (err, result, fields) {
+    con.query("SELECT username FROM user WHERE username = 'teste' ", function (err, result, fields) {
         if (err) throw err;
         console.log(result);
+        if(result[0] == null ||  result[0] == ""){
+            console.log("Nenhum")
+        }
+        else{
+            console.log("tEM!!")
+        }
     });
-})
+})*/
 
 app.post('/createUser', (req, res) =>{
     username = req.body.nameUser
     password = req.body.passUser
     emailUser = req.body.emailUser
     
-    //Check Data Base user already register
-    con.query("SELECT * FROM user", function (err, result, fields) {
+    let query = "SELECT username_db, email_db FROM user WHERE username_db='"+username+"' AND email_db='"+ emailUser +"' "
+    con.query(query, function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
+        if ((result[0] == null ||  result[0] == "") && (result[1] == null || result[1] == "")) {
+            let new_account_query = "INSERT INTO `user` (`id`, `username_db`, `email_db`, `password_db`) VALUES (NULL,'" + username + "', '"+ emailUser +"','" + password+"');"
+            con.query(new_account_query, function (err, result, fields) {
+                if (err) throw err;
+                console.log("Registration completed!")
+                res.send('/')
+            })
+        }
+        else if((result[0] != null ||  result[0] != "" || result[0] != undefined ) || (result[1] != undefined||result[1] != null || result[1] != "")){
+            console.log("Existe uma conta!")
+        }
     });
-    
-    //If not create regist in Data Base
-
 })
 
-/*
-//Verifies if a specific file contains a certain string
-function verifyInput(directoryPathAndFile, input){
-    fs.readFile(directoryPathAndFile, (err, data) => {
-        if (err) throw err;
-        if(data.includes(input)){
-            return true
-        }
-    })
-}*/
 
 app.post('/login', function (req, res) {
-    username = req.body.name
-    auth = true;
-    res.redirect('/connect')
+    let username_i = req.body.name_input
+    let password_i = req.body.password_input
+    let login_query = "SELECT username_db, password_db FROM user WHERE username_db='"+username_i+"' AND password_db='"+ password_i +"' ";
 
+    con.query(login_query, function (err, result, fields) {
+        try{
+            if (err) throw err;
+            if ((result[0].username_db == username_i) && (result[0].password_db == password_i)) {
+                auth = true;
+                username = username_i
+                res.redirect('/connect')
+            }
+        }
+        catch(e){
+            res.sendFile(__dirname + '/view/connection.html');
+        }
+    });
 
-    //var directoryPath = path.join(__dirname, '/users/');
-    /*
-    //Verify Login
-    fs.readdir(directoryPath, function (err, files) {
-        files.forEach(function (file) {
-            //console.log(vari + files[0])
-            actualFile = files[vari]
-            var text = fs.readFileSync(__dirname + "/users/" + actualFile, 'utf-8');
-            var textByLine = text.split('\n')
-            //console.log("file in avaluiation: " + actualFile)
-            if (err) {
-                return console.log('Unable to scan directory: ' + err);     
-            }
-            else{ //Scan all .txt files in users to verify if user has an account created
-                //console.log(String(textByLine))
-                //console.log(String(usernameInput))
-                //console.log(String(textByLine).indexOf(String(usernameInput)))
-                if(String(textByLine).indexOf(String(usernameInput)) != -1 && String(textByLine).indexOf(String(passwordInput)) != -1){
-                    auth = true;       
-                    return
-                }
-            }
-            vari ++
-        })
-        res.redirect('/connect')
-    })*/
 });
 
 app.get('/connect', (req, res)=>{
@@ -188,7 +164,6 @@ app.get('/connect', (req, res)=>{
 app.get('/mainmenu', (req, res) => {
     if(!auth){res.redirect('/')}
     else{
-        //res.sendFile(__dirname + '/view/main.html')
         res.render(__dirname + '/view/main.html', {username:username,Hostip:Hostip,userIp:userIp})
     }
 })
@@ -211,36 +186,6 @@ app.get('/download', (req, res) => {
     !auth?res.redirect('/'):res.render(__dirname + '/view/download.html', {username:username});
 })
 
-/*
-//Verify user by sending email (previously inserted - above) with 20 caracters code. If correct inserted then it deletes all files
-app.get('/deleteCheck', (req, res) =>{
-    if(auth == true){
-        res.sendFile(__dirname + '/view/sendCode.html')
-    }else{
-        res.redirect('/')
-    }
-})
-
-//Sends code the email
-app.post('/sendCode', (req, res)=>{
-    if(auth==false){
-        res.redirect('/')
-    }
-    emailUser = req.body.sendCode
-    console.log("emailUser " + emailUser)
-    transporter.sendMail(mailOptionsCodeDelete, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          //console.log('Email sent: ' + info.response);
-          console.log("*** CODE REQUEST ***")
-          console.log("CODE REQUESTED BY: "+ username )
-          console.log("Purpose: DELETE ALL FILES ")
-        }
-    });
-    res.redirect('/deleteCheckPage')
-})*/
-
 //Delete all files option
 app.get('/deleteCheck', (req, res) =>{
     if(auth){
@@ -256,16 +201,6 @@ app.get('/deleteCheck', (req, res) =>{
 app.post('/deleteCheck', (req, res)=>{
     if(!auth){res.redirect('/')}
     res.redirect('/deleteall');
-    /*
-    //checkCode = crypto.randomBytes(20).toString('hex');// random code generated by email
-    console.log("Check code: " + checkCode)
-    if(req.body.verifyCode == checkCode){
-        //console.log("post1: " + req.body.verifyCode)
-        res.redirect('/deleteall')
-    }else{
-        //console.log("post2: " + req.body.verifyCode)
-        res.redirect('/')
-    }*/
 })
 
 
@@ -333,34 +268,6 @@ app.get('/files', (req, res)=>{
             //console.log("all files: " + fileText)
             res.redirect('/contentHtml')
         });
-        //res.render(__dirname + '/view/content.html', {fileText:fileText})
-        
-        /*
-        //requiring path and fs modules
-        //const path = require('path');
-        //const fs = require('fs');
-        //joining path of directory 
-        const directoryPath = path.join(__dirname, '/uploads/');
-        var fileText = "";
-        //passsing directoryPath and callback function
-        fs.readdir(directoryPath, function (err, files) {
-            //handling error
-            if (err) {
-                return console.log('Unable to scan directory: ' + err);
-            }
- 
-            //listing all files using forEach
-            files.forEach(function (file) {
-                // Do whatever you want to do with the file
-                fileText += file + " / "
-            });
-            //Send a report file to user
-            //var text1 = "Filename: " + filename + ", Size(Bytes): " + fileSize + ", IP: " + req.connection.remoteAddress
-            res.attachment('Files in directory ' + '.txt')
-            res.type('txt')
-            res.send(fileText)
-        });
-        res.download(__dirname + '/uploads/')*/
     }
 })
 
@@ -376,21 +283,15 @@ app.get('/contentHtml', (req, res)=>{
 app.post('/downloads', (req, res)=>{
     if(!auth){res.redirect('/')}
     else if(req.body.namefile == "" || req.body.typefile == ""){
-        //alert user to fill the form
-        //res.send(alert("File do not exist"))
         res.redirect('/download')
-        //res.redirect('/download')
     }
     else{
         Namefile = req.body.namefile
         Typefile = req.body.typefile
-        //console.log(Namefile);
-        //console.log(Typefile);
         res.download(__dirname + '/uploads/'+Namefile + "." + Typefile)
         console.log("***File Downloaded***")
         console.log("Username: " + username)
         console.log("File: "+Namefile + "." + Typefile+"\n")
-        //res.redirect('/download')
     }
 })
 
