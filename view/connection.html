@@ -12,6 +12,7 @@
         </section>
         
         <!-- Login Box -->
+        <p id="error" style="color: red;text-align: center; size: 0px;"> </p>
         <section class="mainmenuLogin">
             <form action="/login" method="post">
                 
@@ -48,9 +49,16 @@
 
         </section>
     </body>
-    <script>
-        //Get user name and put on p tag 
-        var usernameInputHTML = " <%= username %> "
-        document.getElementById("info").textContent += usernameInputHTML;
+    <script>    
+
+        var failed = " <%= login_failed %> "
+        var i = 0
+        console.log("a::: "+failed)
+        console.log(typeof(failed))
+        if(failed.match("true")){
+            document.getElementById("error").textContent += "Login Incorrect!";
+        }
+        
+
     </script>
 </html>

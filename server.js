@@ -44,8 +44,13 @@ var con = mysql.createConnection({
 })
 
 con.connect((err) =>{
-    if(err) throw err;
-    console.log("Data Base Connected!")
+    try{
+        if(err) throw err;
+        console.log("Data Base Connected! \n")
+    }
+    catch(e){
+        console.log("Could not connect to Data Base\nMore information here:\n"+e)
+    }
 })
 
 //Email Configuration(node mailer)
@@ -121,7 +126,7 @@ app.post('/createUser', (req, res) =>{
             con.query(new_account_query, function (err, result, fields) {
                 if (err) throw err;
                 console.log("Registration completed!")
-                res.send('/')
+                res.redirect('/')
             })
         }
         else if((result[0] != null ||  result[0] != "" || result[0] != undefined ) || (result[1] != undefined||result[1] != null || result[1] != "")){
@@ -146,7 +151,10 @@ app.post('/login', function (req, res) {
             }
         }
         catch(e){
-            res.sendFile(__dirname + '/view/connection.html');
+            //res.sendFile(__dirname + '/view/connection.html');
+            let login_failed = true
+            console.log("teste")
+            res.render(__dirname + '/view/connection.html', {login_failed:login_failed})
         }
     });
 
@@ -384,5 +392,5 @@ app.post('/uploadFile', (req, res) =>{
 
 app.listen(port, function(){
     console.log("**************")
-    console.log("SERVER ONLINE\nListening on Port " + port +"\nTo terminate the server press: CTRL + C\nServer Local IP: " + ip.address()+"\n")
+    console.log("SERVER ONLINE\nListening on Port " + port +"\nTo terminate the server press: CTRL + C\nServer Local IP: " + ip.address())
 });
