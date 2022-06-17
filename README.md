@@ -7,7 +7,7 @@
 ## 1)The program, and his functions.
 
 ### General overview of the program.
-The device that is hosting the server will be able to store and manage files(upload, download, delete and see the content) in the 'uploads' folder in the host machine. Those files in this folder can be accessed by other devices, if they are connected in the same network by using (in the browser) the ip visible in the terminal (Host Ip) (or localhost, if we wanted to access in the host device)
+It's a simple node.js local webserver, that allows the local machine to store and manage files(upload, download, delete and see the content) in the 'uploads' folder. Those files in this folder can be accessed by other devices, if they are connected in the same network by using (in the browser) the ip visible in the terminal (Host Ip) (or localhost, if we wanted to access in the host device)
 
 ![serverstart](https://user-images.githubusercontent.com/61146730/135846159-10ffc2e4-ac52-4d20-88a6-d36602c2330d.PNG)
 
