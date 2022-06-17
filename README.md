@@ -1,8 +1,8 @@
 # Nodejs_file_storage
 
-1)The program, and his functions.
+1)The program, and functions.
 
-2)How to run!
+2)How to run.
 
 ## 1)The program, and his functions.
 
